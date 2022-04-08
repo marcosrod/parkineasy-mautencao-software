@@ -1,0 +1,52 @@
+.titulo {
+  text-align: center;
+  flex: 1;
+  font-size: 35px;
+  margin-top: 5px;
+}
+
+.centro {
+  flex: 1;
+  height: 300px;
+  width: 600px;
+  background-color: #f1f1f1;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: black;
+  margin-top: 10%;
+  position: relative;
+  box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
+}
+
+.voltar {
+  float: right;
+  margin-right: 5%;
+}
+
+.btn-confirmar-selecao {
+  position: absolute;
+  bottom: 10%;
+  right: 16%;
+}
+
+.btn-voltar {
+  position: absolute;
+  bottom: 10%;
+  left: 16%;
+}
+
+.IdVaga {
+  margin-top: 8%;
+  margin-left: 15%;
+}
+
+.selecionarVaga {
+  margin-left: 33.5%;
+  margin-top: 7%;
+}
+
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

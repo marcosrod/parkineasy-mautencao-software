@@ -1,0 +1,33 @@
+<div class="fundo">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span  class="titulo">Selecione o Tipo</span>
+    </mat-toolbar>
+  </div>
+  <div class="centro">
+    <img
+      class="logo"
+      src="assets/images/parkicon.png"
+      width="70"
+      height="70"
+      alt="Parkineasy icon"
+    />
+    <div class="container-botoes">
+
+    <div class="comum" (click) = "listarVagas(1)">
+      <img class="comumimg" src="assets/images/comum.png" alt="" style="height: 250px; width: 250px; align-self: center;">
+      <p class="Texto"> Vaga Comum</p>
+
+    </div>
+    <div class="idoso" (click) = "listarVagas(3)">
+      <img class="comumimg" src="assets/images/idoso.png" alt="" style="height: 250px; width: 250px; align-self: center;">
+      <p class="Texto"> Vaga de Idoso</p>
+    </div>
+    <div class="deficiente" (click) = "listarVagas(2)">
+      <img class="comumimg" src="assets/images/deficiente.png" alt="" style="height: 250px; width: 250px; align-self: center;">
+      <p class="Texto"> Vaga de Deficiente</p>
+    </div>
+
+    </div>
+  </div>
+</div>

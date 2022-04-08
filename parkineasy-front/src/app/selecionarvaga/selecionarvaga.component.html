@@ -1,0 +1,46 @@
+<div class="fundo">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span class="titulo">Selecionar Vaga</span>
+    </mat-toolbar>
+  </div>
+  <div class="centro">
+    <img
+      class="logo"
+      src="assets/images/parkicon.png"
+      width="70"
+      height="70"
+      alt="Parkineasy icon"
+    />
+    <form #addForm="ngForm" (ngSubmit)="confirmar(addForm)">
+      <mat-form-field class="selecionarVaga" appearance="fill">
+        <mat-label>Selecione uma Vaga</mat-label>
+        <mat-select ngModel name="codigoVaga">
+          <mat-option *ngFor="let vaga of listaVagas" [value]="vaga">
+            {{ vaga }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button
+          id="selecionar-vaga"
+          type="submit"
+          class="btn-confirmar-selecao"
+          mat-raised-button
+          color="primary"
+        >
+          Confirmar
+        </button>
+        <button
+          (click)="voltar()"
+          id="voltar-selecao"
+          class="btn-voltar"
+          mat-raised-button
+          color="primary"
+        >
+          Voltar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

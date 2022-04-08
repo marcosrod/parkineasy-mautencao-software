@@ -1,0 +1,66 @@
+<div class="fundo">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span class="titulo">Login de funcionários</span>
+    </mat-toolbar>
+  </div>
+  <div class="centro">
+    <img
+      class="logo"
+      src="assets/images/parkicon.png"
+      width="70"
+      height="70"
+      alt="Parkineasy icon"
+    />
+    <form
+      class="form-inputs"
+      #loginForm="ngForm"
+      (ngSubmit)="onSubmit(loginForm)"
+    >
+      <mat-form-field class="usuario-funcionario" appearance="fill">
+        <mat-label>Usuário</mat-label>
+        <input
+          ngModel
+          name="usuario"
+          matInput
+          #input
+          placeholder="bruno.macedo"
+          required
+        />
+        <mat-hint align="end"></mat-hint>
+      </mat-form-field>
+      <mat-form-field class="senha-funcionario" appearance="fill">
+        <mat-label>Senha</mat-label>
+        <input
+          ngModel
+          name="senha"
+          matInput
+          [type]="mostrarCampoSenha ? 'password' : 'text'"
+          required
+        />
+        <div
+          mat-icon-button
+          matSuffix
+          (click)="mostrarCampoSenha = !mostrarCampoSenha"
+          [attr.aria-label]="'Esconder senha'"
+          [attr.aria-pressed]="mostrarCampoSenha"
+        >
+          <mat-icon>{{
+            mostrarCampoSenha ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </div>
+      </mat-form-field>
+      <div>
+        <button
+          id="logar-funcionario"
+          type="submit"
+          class="btn-logar"
+          mat-raised-button
+          color="primary"
+        >
+          Logar
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

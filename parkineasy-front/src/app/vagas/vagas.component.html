@@ -1,0 +1,62 @@
+<div class="fundo">
+  <div class="container">
+    <mat-toolbar color="primary">
+      <span class="titulo">Cadastrar Vagas</span>
+    </mat-toolbar>
+  </div>
+  <div class="centro">
+    <img
+      class="logo"
+      src="assets/images/parkicon.png"
+      width="70"
+      height="70"
+      alt="Parkineasy icon"
+    />
+    <form #addForm="ngForm" (ngSubmit)="onAddVaga(addForm)">
+      <mat-form-field
+        class="IdVaga"
+        hintLabel="Max 10 characters"
+        appearance="fill"
+      >
+        <mat-label>Digite o ID da vaga</mat-label>
+        <input
+          ngModel
+          name="codigo"
+          matInput
+          #input
+          maxlength="10"
+          placeholder="A01"
+        />
+        <mat-hint align="end">{{ input.value?.length || 0 }}/4</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="tipoVaga" appearance="fill">
+        <mat-label>Tipo da vaga</mat-label>
+        <mat-select ngModel name="tipo">
+          <mat-option value="1">Comum</mat-option>
+          <mat-option value="2">Deficiente</mat-option>
+          <mat-option value="3">Idoso</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button
+          id="criar-vaga"
+          type="submit"
+          class="btn-criar"
+          mat-raised-button
+          color="primary"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+    <button
+      (click)="voltar()"
+      id="voltar-menu"
+      class="btn-voltar"
+      mat-raised-button
+      color="primary"
+    >
+      Voltar
+    </button>
+  </div>
+</div>
