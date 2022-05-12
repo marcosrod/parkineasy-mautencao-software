@@ -1,9 +1,16 @@
 package br.edu.utfpr.parkineasy.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "vaga")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vaga {
     @Id
     private String codigo;
@@ -15,9 +22,6 @@ public class Vaga {
 
     @OneToOne(mappedBy = "vaga")
     private Pagamento pagamento;
-
-    public Vaga() {
-    }
 
     public Vaga(String codigo, Integer tipoVaga) {
         this.codigo = codigo;

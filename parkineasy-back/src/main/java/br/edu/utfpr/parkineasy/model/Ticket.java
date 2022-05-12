@@ -1,10 +1,17 @@
 package br.edu.utfpr.parkineasy.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Ticket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
