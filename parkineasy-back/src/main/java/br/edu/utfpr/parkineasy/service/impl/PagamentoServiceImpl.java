@@ -27,13 +27,10 @@ public class PagamentoServiceImpl implements PagamentoService {
     
     @Override
     public PagamentoResponse pagarTicket(PagamentoRequest pagamentoRequest) {
-        System.out.println(pagamentoRequest);
         var ticket = ticketRepository.findById(pagamentoRequest.getTicketId())
             .orElseThrow(() -> new ParkineasyException("Ticket Não Encontrado."));
-        System.out.println(ticket);
         var vaga = vagaRepository.findById(pagamentoRequest.getVagaId())
             .orElseThrow(() -> new ParkineasyException("Vaga Não Encontrada."));
-        System.out.println(vaga);
         var pagamento = Pagamento.builder()
             .dataHora(LocalDateTime.now())
             .ticket(ticket)
@@ -41,7 +38,6 @@ public class PagamentoServiceImpl implements PagamentoService {
             .metodoPagamento(pagamentoRequest.getMetodoPagamento())
             .valor(pagamentoRequest.getValor())
             .build();
-        System.out.println(pagamento);
         var pagamentoRealizado = pagamentoRepository.save(pagamento);
         vaga.setOcupada(false);
         vagaRepository.save(vaga);
