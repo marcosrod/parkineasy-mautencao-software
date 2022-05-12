@@ -1,9 +1,6 @@
 package br.edu.utfpr.parkineasy.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "vaga")
@@ -15,6 +12,9 @@ public class Vaga {
 
     @Column(name = "tipo_vaga")
     private Integer tipoVaga;
+
+    @OneToOne(mappedBy = "vaga")
+    private Pagamento pagamento;
 
     public Vaga() {
     }
