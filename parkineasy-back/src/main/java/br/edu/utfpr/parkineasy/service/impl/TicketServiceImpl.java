@@ -6,8 +6,9 @@ import br.edu.utfpr.parkineasy.model.Ticket;
 import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.service.TicketService;
 import br.edu.utfpr.parkineasy.service.VagaService;
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 @Service
 public class TicketServiceImpl implements TicketService {

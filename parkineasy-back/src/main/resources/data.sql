@@ -13,3 +13,6 @@ VALUES ('A01', FALSE, 1),
        ('A07', FALSE, 3),
        ('A08', FALSE, 2);
        
+INSERT INTO ticket(id, codigo_vaga, data_hora)
+VALUES(1, 'A02', '2022-11-05')
+       

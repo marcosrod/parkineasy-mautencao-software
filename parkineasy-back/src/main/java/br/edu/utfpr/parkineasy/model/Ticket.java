@@ -1,12 +1,7 @@
 package br.edu.utfpr.parkineasy.model;
 
 import java.time.LocalDateTime;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
@@ -20,6 +15,9 @@ public class Ticket {
 
     @Column(name = "data_hora")
     private LocalDateTime dataHora;
+
+    @OneToOne(mappedBy = "ticket")
+    private Pagamento pagamento;
 
     public Long getId() {
         return id;
