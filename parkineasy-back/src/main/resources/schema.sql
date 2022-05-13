@@ -1,60 +1,35 @@
-CREATE TABLE IF NOT EXISTS funcionario
-(
-    id
-    BIGINT
-    PRIMARY
-    KEY
-    AUTO_INCREMENT,
-    email
-    VARCHAR
-(
-    255
-) NOT NULL,
-    nome VARCHAR
-(
-    255
-) NOT NULL,
-    senha VARCHAR
-(
-    255
-) NOT NULL,
-    usuario VARCHAR
-(
-    255
-) NOT NULL
-    );
-CREATE TABLE IF NOT EXISTS vaga
-(
-    codigo VARCHAR
-(
-    255
-) PRIMARY KEY,
-    ocupada BOOLEAN NOT NULL,
-    tipo_vaga INT NOT NULL
-    );
-CREATE TABLE IF NOT EXISTS ticket
-(
-    id
-    BIGINT
-    PRIMARY
-    KEY
-    AUTO_INCREMENT,
-    codigo_vaga
-    VARCHAR
-(
-    255
-) NOT NULL,
-    data_hora DATE NOT NULL
-    );
+CREATE TABLE funcionario (
+  id bigint NOT NULL AUTO_INCREMENT,
+  email varchar(255) NOT NULL,
+  nome varchar(255) NOT NULL,
+  senha varchar(255) NOT NULL,
+  usuario varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+CREATE TABLE vaga (
+  codigo varchar(255) NOT NULL,
+  ocupada tinyint(1) NOT NULL,
+  tipo_vaga int NOT NULL,
+  PRIMARY KEY (codigo)
+);
     
-CREATE TABLE IF NOT EXISTS PAGAMENTO
-(
-    ID BIGINT PRIMARY KEY AUTO_INCREMENT,
-    DATA_HORA DATE NOT NULL,
-    VALOR DECIMAL(8,2) NOT NULL,
-    METODO_PAGAMENTO INT NOT NULL,
-    ID_TICKET BIGINT NOT NULL,
-    ID_VAGA VARCHAR(255) NOT NULL,
-    FOREIGN KEY (ID_TICKET) REFERENCES TICKET(ID),
-    FOREIGN KEY (ID_VAGA) REFERENCES VAGA(CODIGO)
+CREATE TABLE ticket (
+  id bigint NOT NULL AUTO_INCREMENT,
+  codigo_vaga varchar(255) NOT NULL,
+  data_hora date NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT ticket_ibfk_1 FOREIGN KEY (codigo_vaga) REFERENCES vaga (codigo)
+);
+    
+CREATE TABLE pagamento (
+  id bigint NOT NULL AUTO_INCREMENT,
+  data_hora date NOT NULL,
+  valor decimal(8,2) NOT NULL,
+  metodo_pagamento int NOT NULL,
+  id_ticket bigint NOT NULL,
+  id_vaga varchar(255) NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT pagamento_ibfk_1 FOREIGN KEY (id_ticket) REFERENCES ticket (id),
+  CONSTRAINT pagamento_ibfk_2 FOREIGN KEY (id_vaga) REFERENCES vaga (codigo)
 );
