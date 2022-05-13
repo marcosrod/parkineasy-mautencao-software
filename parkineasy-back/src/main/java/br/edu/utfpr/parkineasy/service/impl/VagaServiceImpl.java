@@ -55,4 +55,12 @@ public class VagaServiceImpl implements VagaService {
             vagaRepository.save(vaga.get());
         });
     }
+
+    @Override
+    public List<VagaResponse> listarTodasOrdenadas() {
+        return vagaRepository.findAllByOrderByCodigoAsc()
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+    }
 }

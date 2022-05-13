@@ -147,4 +147,31 @@ class VagaServiceTest {
             .extracting("codigo", "descricao")
             .containsExactly(codigo, "IDOSO");
     }
+
+    @Test
+    void listarTodasOrdenadas_deveRetornarListaDeVagaResponseVazia_quandoNaoExistirVagasCadastradas() {
+        given(vagaRepository.findAllByOrderByCodigoAsc())
+            .willReturn(List.of());
+        List<VagaResponse> result = vagaService.listarTodasOrdenadas();
+        assertThat(result).isEmpty();
+    }
+
+    @Test
+    void listarTodasOrdenadas_deveRetonarListaDeVagaResponseOrdenada_quandoExistirVagasCadastradas() {
+        var vaga1 = getVagaOf("A01", false, 1);
+        var vaga2 = getVagaOf("A02", false, 2);
+        var vaga3 = getVagaOf("B02", false, 3);
+        var vaga4 = getVagaOf("C03", false, 2);
+        given(vagaRepository.findAllByOrderByCodigoAsc())
+            .willReturn(List.of(vaga1, vaga2, vaga3, vaga4));
+        List<VagaResponse> result = vagaService.listarTodasOrdenadas();
+        assertThat(result)
+            .extracting("codigo", "ocupada", "descricao")
+            .containsExactly(
+                tuple(vaga1.getCodigo(), vaga1.getOcupada(), TipoVaga.valueOf(vaga1.getTipoVaga()).toString()),
+                tuple(vaga2.getCodigo(), vaga2.getOcupada(), TipoVaga.valueOf(vaga2.getTipoVaga()).toString()),
+                tuple(vaga3.getCodigo(), vaga3.getOcupada(), TipoVaga.valueOf(vaga3.getTipoVaga()).toString()),
+                tuple(vaga4.getCodigo(), vaga4.getOcupada(), TipoVaga.valueOf(vaga4.getTipoVaga()).toString())
+            );
+    }
 }

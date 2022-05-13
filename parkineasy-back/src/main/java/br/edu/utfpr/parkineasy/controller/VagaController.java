@@ -38,4 +38,9 @@ public class VagaController {
     public VagaResponse criarVaga(@RequestBody @Valid VagaRequest vagaRequest) {
         return vagaService.criarVaga(vagaRequest);
     }
+    
+    @GetMapping("/ordenadas")
+    public List<VagaResponse> listarTodasOrdenadas() {
+        return vagaService.listarTodasOrdenadas();
+    }
 }

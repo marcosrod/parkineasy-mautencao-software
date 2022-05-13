@@ -12,4 +12,6 @@ public interface VagaService {
     VagaResponse criarVaga(VagaRequest vagaRequest);
 
     void ocuparVaga(String codigo);
+    
+    List<VagaResponse> listarTodasOrdenadas();
 }
