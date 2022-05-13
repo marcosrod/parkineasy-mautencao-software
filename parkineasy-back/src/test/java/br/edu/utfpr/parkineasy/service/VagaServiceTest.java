@@ -91,13 +91,12 @@ class VagaServiceTest {
 
     @Test
     void criarVaga_deveLancarException_quandoCodigoJaEstiverCadastrado() {
-        Vaga vaga = new Vaga();
         VagaRequest vagaRequest = new VagaRequest("A01", 1);
         given(vagaRepository.existsById(any()))
             .willReturn(true);
         assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
             .isExactlyInstanceOf(ValidationException.class)
-            .hasMessage("Vaga ja cadastrada");
+            .hasMessage("A vaga já existe.");
         verify(vagaRepository, never()).save(any());
     }
 
