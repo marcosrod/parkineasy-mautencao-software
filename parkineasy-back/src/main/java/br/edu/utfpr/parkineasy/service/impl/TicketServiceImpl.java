@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Service
 public class TicketServiceImpl implements TicketService {
     private final VagaService vagaService;
-    
     private final VagaRepository vagaRepository;
     private final TicketRepository ticketRepository;
 

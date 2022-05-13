@@ -8,23 +8,22 @@ import br.edu.utfpr.parkineasy.repository.PagamentoRepository;
 import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.PagamentoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 
 @Service
 public class PagamentoServiceImpl implements PagamentoService {
-    
-    @Autowired
-    private TicketRepository ticketRepository;
-    
-    @Autowired
-    private VagaRepository vagaRepository;
-    
-    @Autowired
-    private PagamentoRepository pagamentoRepository;
-    
+    private final TicketRepository ticketRepository;
+    private final VagaRepository vagaRepository;
+    private final PagamentoRepository pagamentoRepository;
+
+    public PagamentoServiceImpl(TicketRepository ticketRepository, VagaRepository vagaRepository, PagamentoRepository pagamentoRepository) {
+        this.ticketRepository = ticketRepository;
+        this.vagaRepository = vagaRepository;
+        this.pagamentoRepository = pagamentoRepository;
+    }
+
     @Override
     public PagamentoResponse pagarTicket(PagamentoRequest pagamentoRequest) {
         var ticket = ticketRepository.findById(pagamentoRequest.getTicketId())

@@ -1,6 +1,8 @@
 package br.edu.utfpr.parkineasy.service;
 
 import br.edu.utfpr.parkineasy.dto.request.PagamentoRequest;
+import br.edu.utfpr.parkineasy.dto.response.PagamentoResponse;
+import br.edu.utfpr.parkineasy.exception.ParkineasyException;
 import br.edu.utfpr.parkineasy.model.Pagamento;
 import br.edu.utfpr.parkineasy.model.Ticket;
 import br.edu.utfpr.parkineasy.model.Vaga;
@@ -20,6 +22,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,11 +35,14 @@ public class PagamentoServiceTest {
     @Mock
     private VagaRepository vagaRepository;
     
+    @Mock
+    private PagamentoRepository pagamentoRepository;
+    
     private PagamentoService pagamentoService;
 
     @BeforeEach
     void setUp() {
-        pagamentoService = new PagamentoServiceImpl();
+        pagamentoService = new PagamentoServiceImpl(ticketRepository, vagaRepository, pagamentoRepository);
     }
 
     private static Pagamento getPagamentoOf(Long id, LocalDateTime dataHora, Double valor,
@@ -64,10 +71,14 @@ public class PagamentoServiceTest {
     public void pagarTicket_deveRetornarComprovantePagamento_sePagamentoOk() {
         when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).build()));
         when(vagaRepository.findById("A01")).thenReturn(Optional.of(Vaga.builder().codigo("A01").build()));
+        when(pagamentoRepository.save(any())).thenReturn(getPagamentoOf(1L, LocalDateTime.now(), 15.20, 
+            EMetodoPagamento.CARTAO, "A01", 1L));
+        
         var pagamentoRequest = getPagamentoRequestOf(1L, "A01", 15.20, 
             EMetodoPagamento.CARTAO);
+        
         assertThat(pagamentoService.pagarTicket(pagamentoRequest))
             .extracting("codigoVaga", "valor", "metodoPagamento")
-            .containsExactly("A02", 15.20, EMetodoPagamento.CARTAO);
+            .containsExactly("A01", 15.20, EMetodoPagamento.CARTAO);
     }
 }
