@@ -3,6 +3,7 @@ package br.edu.utfpr.parkineasy.controller;
 import br.edu.utfpr.parkineasy.dto.request.TicketRequest;
 import br.edu.utfpr.parkineasy.dto.response.TicketResponse;
 import br.edu.utfpr.parkineasy.model.Ticket;
+import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.service.TicketService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.time.LocalDateTime;
@@ -38,10 +39,11 @@ class TicketControllerTest {
     void criarTicket_deveRetornarStatus201ETicketResponse_quandoTicketForCriado() throws Exception {
         long id = 1L;
         String codigoVaga = "A01";
+        var vaga = new Vaga("A01", 1);
         TicketRequest ticketRequest = new TicketRequest(codigoVaga);
         Ticket ticket = new Ticket();
         ticket.setId(id);
-        ticket.setCodigoVaga(codigoVaga);
+        ticket.setVaga(vaga);
         ticket.setDataHora(LocalDateTime.now());
         given(ticketService.criarTicket(any()))
             .willReturn(new TicketResponse(ticket));

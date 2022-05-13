@@ -17,8 +17,9 @@ public class Ticket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo_vaga")
-    private String codigoVaga;
+    @ManyToOne
+    @JoinColumn(name = "codigo_vaga", nullable = false)
+    private Vaga vaga;
 
     @Column(name = "data_hora")
     private LocalDateTime dataHora;
@@ -34,12 +35,12 @@ public class Ticket {
         this.id = id;
     }
 
-    public String getCodigoVaga() {
-        return codigoVaga;
+    public Vaga getVaga() {
+        return vaga;
     }
 
-    public void setCodigoVaga(String codigoVaga) {
-        this.codigoVaga = codigoVaga;
+    public void setVaga(Vaga vaga) {
+        this.vaga = vaga;
     }
 
     public LocalDateTime getDataHora() {

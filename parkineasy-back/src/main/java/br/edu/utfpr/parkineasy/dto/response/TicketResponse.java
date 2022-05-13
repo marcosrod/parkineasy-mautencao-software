@@ -9,7 +9,7 @@ public class TicketResponse {
 
     public TicketResponse(Ticket ticket) {
         id = ticket.getId();
-        codigoVaga = ticket.getCodigoVaga();
+        codigoVaga = ticket.getVaga().getCodigo();
         dataHora = ticket.getDataHora().toString();
     }
 

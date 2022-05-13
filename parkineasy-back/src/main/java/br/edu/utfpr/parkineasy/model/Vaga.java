@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "vaga")
@@ -22,6 +23,9 @@ public class Vaga {
 
     @OneToOne(mappedBy = "vaga")
     private Pagamento pagamento;
+    
+    @OneToMany(mappedBy = "vaga")
+    private List<Ticket> tickets;
 
     public Vaga(String codigo, Integer tipoVaga) {
         this.codigo = codigo;
