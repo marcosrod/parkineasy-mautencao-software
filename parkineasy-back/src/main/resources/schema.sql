@@ -1,4 +1,4 @@
-CREATE TABLE funcionario (
+CREATE TABLE IF NOT EXISTS  funcionario (
   id bigint NOT NULL AUTO_INCREMENT,
   email varchar(255) NOT NULL,
   nome varchar(255) NOT NULL,
@@ -7,14 +7,14 @@ CREATE TABLE funcionario (
   PRIMARY KEY (id)
 );
 
-CREATE TABLE vaga (
+CREATE TABLE IF NOT EXISTS  vaga (
   codigo varchar(255) NOT NULL,
   ocupada tinyint(1) NOT NULL,
   tipo_vaga int NOT NULL,
   PRIMARY KEY (codigo)
 );
     
-CREATE TABLE ticket (
+CREATE TABLE IF NOT EXISTS  ticket (
   id bigint NOT NULL AUTO_INCREMENT,
   codigo_vaga varchar(255) NOT NULL,
   data_hora date NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE ticket (
   CONSTRAINT ticket_ibfk_1 FOREIGN KEY (codigo_vaga) REFERENCES vaga (codigo)
 );
     
-CREATE TABLE pagamento (
+CREATE TABLE IF NOT EXISTS pagamento (
   id bigint NOT NULL AUTO_INCREMENT,
   data_hora date NOT NULL,
   valor decimal(8,2) NOT NULL,

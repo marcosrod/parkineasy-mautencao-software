@@ -45,7 +45,7 @@ public class PagamentoServiceTest {
         pagamentoService = new PagamentoServiceImpl(ticketRepository, vagaRepository, pagamentoRepository);
     }
 
-    private static Pagamento getPagamentoOf(Long id, LocalDateTime dataHora, Double valor,
+    private static Pagamento getPagamentoOf(Long id, Double valor,
                                             EMetodoPagamento metodoPagamento, String codigoVaga, Long idTicket) {
         return Pagamento.builder()
             .id(id)
@@ -57,24 +57,24 @@ public class PagamentoServiceTest {
             .build();
     }
     
-    private static PagamentoRequest getPagamentoRequestOf(Long ticketId, String vagaId, Double valor, 
+    private static PagamentoRequest getPagamentoRequestOf(Long ticketId, String vagaId, 
                                                           EMetodoPagamento metodoPagamento) {
         return PagamentoRequest.builder()
             .ticketId(ticketId)
             .vagaId(vagaId)
-            .valor(valor)
             .metodoPagamento(metodoPagamento)
             .build();
     }
     
     @Test
     public void pagarTicket_deveRetornarComprovantePagamento_sePagamentoOk() {
-        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).build()));
+        var dataHora = LocalDateTime.of(2022, 10, 5, 18, 10, 05);
+        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).dataHora(dataHora).build()));
         when(vagaRepository.findById("A01")).thenReturn(Optional.of(Vaga.builder().codigo("A01").build()));
-        when(pagamentoRepository.save(any())).thenReturn(getPagamentoOf(1L, LocalDateTime.now(), 15.20, 
+        when(pagamentoRepository.save(any())).thenReturn(getPagamentoOf(1L, 15.20, 
             EMetodoPagamento.CARTAO, "A01", 1L));
         
-        var pagamentoRequest = getPagamentoRequestOf(1L, "A01", 15.20, 
+        var pagamentoRequest = getPagamentoRequestOf(1L, "A01", 
             EMetodoPagamento.CARTAO);
         
         assertThat(pagamentoService.pagarTicket(pagamentoRequest))
