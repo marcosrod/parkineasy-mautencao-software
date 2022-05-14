@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS  vaga (
 CREATE TABLE IF NOT EXISTS  ticket (
   id bigint NOT NULL AUTO_INCREMENT,
   codigo_vaga varchar(255) NOT NULL,
-  data_hora date NOT NULL,
+  data_hora TIMESTAMP NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT ticket_ibfk_1 FOREIGN KEY (codigo_vaga) REFERENCES vaga (codigo)
 );
