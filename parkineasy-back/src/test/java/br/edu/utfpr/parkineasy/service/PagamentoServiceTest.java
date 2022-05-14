@@ -81,4 +81,14 @@ public class PagamentoServiceTest {
             .extracting("codigoVaga", "valor", "metodoPagamento")
             .containsExactly("A01", 15.20, EMetodoPagamento.CARTAO);
     }
+    
+    @Test
+    public void calcularValor_deveRetornarValorDoTicket_seTicketExistir() {
+        var dataHora = LocalDateTime.of(2022, 10, 5, 18, 10, 05);
+        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).dataHora(dataHora).build()));
+        
+        assertThat(pagamentoService.calcularValor(1L))
+            .extracting(Double::doubleValue)
+            .isNotNull();
+    }
 }
