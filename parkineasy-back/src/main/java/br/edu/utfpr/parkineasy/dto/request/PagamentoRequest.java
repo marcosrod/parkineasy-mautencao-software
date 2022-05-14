@@ -22,6 +22,10 @@ public class PagamentoRequest {
     @NotNull
     @JsonProperty("vagaId")
     private String vagaId;
+
+    @NotNull
+    @JsonProperty("valor")
+    private Double valor;
     
     @NotNull
     @JsonProperty("metodoPagamento")

@@ -57,24 +57,24 @@ public class PagamentoServiceTest {
             .build();
     }
     
-    private static PagamentoRequest getPagamentoRequestOf(Long ticketId, String vagaId, 
+    private static PagamentoRequest getPagamentoRequestOf(Long ticketId, String vagaId, Double valor, 
                                                           EMetodoPagamento metodoPagamento) {
         return PagamentoRequest.builder()
             .ticketId(ticketId)
             .vagaId(vagaId)
+            .valor(valor)
             .metodoPagamento(metodoPagamento)
             .build();
     }
     
     @Test
     public void pagarTicket_deveRetornarComprovantePagamento_sePagamentoOk() {
-        var dataHora = LocalDateTime.of(2022, 10, 5, 18, 10, 05);
-        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).dataHora(dataHora).build()));
+        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).build()));
         when(vagaRepository.findById("A01")).thenReturn(Optional.of(Vaga.builder().codigo("A01").build()));
         when(pagamentoRepository.save(any())).thenReturn(getPagamentoOf(1L, 15.20, 
             EMetodoPagamento.CARTAO, "A01", 1L));
         
-        var pagamentoRequest = getPagamentoRequestOf(1L, "A01", 
+        var pagamentoRequest = getPagamentoRequestOf(1L, "A01", 15.20, 
             EMetodoPagamento.CARTAO);
         
         assertThat(pagamentoService.pagarTicket(pagamentoRequest))

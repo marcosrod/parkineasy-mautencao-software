@@ -30,22 +30,27 @@ public class PagamentoServiceImpl implements PagamentoService {
             .orElseThrow(() -> new ParkineasyException("Ticket Não Encontrado."));
         var vaga = vagaRepository.findById(pagamentoRequest.getVagaId())
             .orElseThrow(() -> new ParkineasyException("Vaga Não Encontrada."));
-        var horarioTicket = ticket.getDataHora().toLocalTime().toSecondOfDay();
-        var horarioAtual = LocalDateTime.now().toLocalTime().toSecondOfDay();
-        var horasGastas = ((horarioAtual-horarioTicket) / 60) / 60;
-        double valor = 5 * horasGastas;
-        
         var pagamento = Pagamento.builder()
             .dataHora(LocalDateTime.now())
             .ticket(ticket)
             .vaga(vaga)
             .metodoPagamento(pagamentoRequest.getMetodoPagamento())
-            .valor(valor)
+            .valor(pagamentoRequest.getValor())
             .build();
         var pagamentoRealizado = pagamentoRepository.save(pagamento);
         vaga.setOcupada(false);
         vagaRepository.save(vaga);
         
         return PagamentoResponse.convertFrom(pagamentoRealizado);
+    }
+    
+    public Double calcularValor(Long ticketId) {
+        var ticket = ticketRepository.findById(ticketId)
+            .orElseThrow(() -> new ParkineasyException("Ticket Não Encontrado."));
+        var horarioTicket = ticket.getDataHora().toLocalTime().toSecondOfDay();
+        var horarioAtual = LocalDateTime.now().toLocalTime().toSecondOfDay();
+        var horasGastas = ((horarioAtual-horarioTicket) / 60) / 60;
+        
+        return (double) (5 * horasGastas);
     }
 }

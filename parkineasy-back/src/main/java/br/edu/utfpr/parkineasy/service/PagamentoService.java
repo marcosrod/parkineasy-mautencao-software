@@ -5,4 +5,6 @@ import br.edu.utfpr.parkineasy.dto.response.PagamentoResponse;
 
 public interface PagamentoService {
     PagamentoResponse pagarTicket(PagamentoRequest pagamentoRequest);
+    
+    Double calcularValor(Long ticketId);
 }
