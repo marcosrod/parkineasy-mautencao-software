@@ -2,16 +2,17 @@
   text-align: center;
   flex: 1;
   font-size: 35px;
-  margin-top: 5px;
+  margin-top: 25px;
 }
 
 .centro {
   flex: 1;
-  height: 300px;
   width: 600px;
   background-color: #f1f1f1;
   margin-left: auto;
   margin-right: auto;
+  padding-top: 20px;
+  padding-bottom: 10px;
   box-shadow: black;
   margin-top: 10%;
   position: relative;
@@ -41,12 +42,104 @@
 }
 
 .selecionarVaga {
-  margin-left: 33.5%;
-  margin-top: 7%;
+  margin: 7% 0 15% 33.5%;
 }
 
 .logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Ticket Styles */
+
+.ticketTitle {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #454555;
+  border-top: 1px solid #454555;
+  border-bottom: 1px solid #454555;
+  padding: 10px 0
+}
+
+.ticketBold {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: #454555;
+}
+
+.ticketText {
+  text-align: center;
+  font-size: 20px;
+  color: #454555;
+}
+
+.ticketRow {
+  margin-bottom: 20px;
+}
+
+.btn-pagar {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 35px;
+}
+
+/* Modal Styles */
+
+.modalBackground {
+  z-index: 3;
+  top: 0;
+  left: 0;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.658);
+  display: flex;
+  justify-content: center;
+}
+
+.closeBtn {
+  cursor: pointer;
+  margin-left: 40%;
+}
+
+.modalBox {
+  margin-top: 20vh;
+  background-color: #FFF;
+  width: 800px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalMethods {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex: 1;
+}
+
+.modalValue {
+  text-align: center;
+  font-size: 26px;
+  color: #454555;
+  padding: 20px 0;
+}
+
+.modalTitle {
+  text-align: center;
+  font-size: 26px;
+  background-color: #454555;
+  color: #FFF;
+  border-bottom: 1px solid #454555;
+  padding: 20px 0;
+  box-shadow: 0px 0px 9px 3px rgba(41,41,41,.25);
+}
+
+.modalText {
+  text-align: center;
+  font-size: 20px;
 }
