@@ -7,6 +7,8 @@ import { TicketRequest } from './ticket-request';
 import { TicketResponse } from './ticket-response';
 import { VagaRequest } from './vaga-request';
 import { VagaResponse } from './vaga-response';
+import { PagamentoRequest } from './pagamento-request';
+import { PagamentoResponse } from './pagamento-response';
 
 @Injectable({ providedIn: 'root' })
 export class VagasService {
@@ -27,12 +29,27 @@ export class VagasService {
     );
   }
 
+  public calcularValor(tickedId: string) {
+    return this.http.get<number>(
+      `${this.apiServerUrl}/api/v1/tickets/${tickedId}/calcular-valor`
+    );
+  }
+
   public confirmarTicket(
     ticketRequest: TicketRequest
   ): Observable<TicketResponse> {
     return this.http.post<TicketResponse>(
       `${this.apiServerUrl}/api/v1/tickets`,
       ticketRequest
+    );
+  }
+
+  public pagarTicket(
+    pagamentoRequest: PagamentoRequest
+  ): Observable<PagamentoResponse> {
+    return this.http.post<PagamentoResponse>(
+      `${this.apiServerUrl}/api/v1/tickets/pagar`,
+      pagamentoRequest
     );
   }
 }
