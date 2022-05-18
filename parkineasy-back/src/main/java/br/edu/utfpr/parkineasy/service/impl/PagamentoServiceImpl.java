@@ -28,12 +28,11 @@ public class PagamentoServiceImpl implements PagamentoService {
     public PagamentoResponse pagarTicket(PagamentoRequest pagamentoRequest) {
         var ticket = ticketRepository.findById(pagamentoRequest.getTicketId())
             .orElseThrow(() -> new ParkineasyException("Ticket Não Encontrado."));
-        var vaga = vagaRepository.findById(pagamentoRequest.getVagaId())
+        var vaga = vagaRepository.findById(ticket.getVaga().getCodigo())
             .orElseThrow(() -> new ParkineasyException("Vaga Não Encontrada."));
         var pagamento = Pagamento.builder()
             .dataHora(LocalDateTime.now())
             .ticket(ticket)
-            .vaga(vaga)
             .metodoPagamento(pagamentoRequest.getMetodoPagamento())
             .valor(pagamentoRequest.getValor())
             .build();
@@ -41,7 +40,7 @@ public class PagamentoServiceImpl implements PagamentoService {
         vaga.setOcupada(false);
         vagaRepository.save(vaga);
         
-        return PagamentoResponse.convertFrom(pagamentoRealizado);
+        return PagamentoResponse.convertFrom(pagamentoRealizado, vaga);
     }
     
     public Double calcularValor(Long ticketId) {

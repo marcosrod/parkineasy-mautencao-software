@@ -20,9 +20,6 @@ public class Vaga {
 
     @Column(name = "tipo_vaga")
     private Integer tipoVaga;
-
-    @OneToOne(mappedBy = "vaga")
-    private Pagamento pagamento;
     
     @OneToMany(mappedBy = "vaga")
     private List<Ticket> tickets;

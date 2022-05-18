@@ -28,8 +28,6 @@ CREATE TABLE IF NOT EXISTS pagamento (
   valor decimal(8,2) NOT NULL,
   metodo_pagamento int NOT NULL,
   id_ticket bigint NOT NULL,
-  id_vaga varchar(255) NOT NULL,
   PRIMARY KEY (id),
-  CONSTRAINT pagamento_ibfk_1 FOREIGN KEY (id_ticket) REFERENCES ticket (id),
-  CONSTRAINT pagamento_ibfk_2 FOREIGN KEY (id_vaga) REFERENCES vaga (codigo)
+  CONSTRAINT pagamento_ibfk_1 FOREIGN KEY (id_ticket) REFERENCES ticket (id)
 );

@@ -2,6 +2,7 @@ package br.edu.utfpr.parkineasy.dto.response;
 
 
 import br.edu.utfpr.parkineasy.model.Pagamento;
+import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.model.enumeration.EMetodoPagamento;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,9 +20,9 @@ public class PagamentoResponse {
     private Double valor;
     private EMetodoPagamento metodoPagamento;
     
-    public static PagamentoResponse convertFrom(Pagamento pagamento) {
+    public static PagamentoResponse convertFrom(Pagamento pagamento, Vaga vaga) {
         return PagamentoResponse.builder()
-            .codigoVaga(pagamento.getVaga().getCodigo())
+            .codigoVaga(vaga.getCodigo())
             .dataPagamento(pagamento.getDataHora())
             .metodoPagamento(pagamento.getMetodoPagamento())
             .valor(pagamento.getValor())

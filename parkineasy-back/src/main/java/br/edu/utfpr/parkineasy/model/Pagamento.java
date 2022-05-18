@@ -32,8 +32,4 @@ public class Pagamento {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TICKET", referencedColumnName = "id")
     private Ticket ticket;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ID_VAGA", referencedColumnName = "codigo")
-    private Vaga vaga;
 }
