@@ -23,7 +23,6 @@ public class PagamentoRepositoryTest {
             .dataHora(LocalDateTime.now())
             .valor(valor)
             .metodoPagamento(metodoPagamento)
-            .vaga(Vaga.builder().codigo(codigoVaga).build())
             .ticket(Ticket.builder().id(idTicket).build())
             .build();
     }
