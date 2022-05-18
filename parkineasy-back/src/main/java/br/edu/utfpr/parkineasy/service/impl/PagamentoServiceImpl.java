@@ -48,7 +48,7 @@ public class PagamentoServiceImpl implements PagamentoService {
                         .tipoVaga(vaga.getTipoVaga())
                             .pagamento(pagamentoRealizado)
                                 .build();
-        var caixaSalvo = caixaRepository.save(caixa);
+        caixaRepository.save(caixa);
         vaga.setOcupada(false);
         vagaRepository.save(vaga);
         
