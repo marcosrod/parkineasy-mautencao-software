@@ -15,7 +15,14 @@ export class TiposvagasComponent implements OnInit {
   }
 
   public listarVagas(id:number){
-    this.router.navigateByUrl(`/usuario/vaga/selecionarvaga/${id}`);
-
+    let vagaType = '';
+    if(id === 1){
+      vagaType = 'Comum'
+    } else if(id === 2){
+      vagaType = 'Deficiente'
+    } else {
+      vagaType = 'Idoso'
+    }
+    this.router.navigateByUrl(`/usuario/vaga/selecionarvaga/${id}`,{state: {vagaType}});
   }
 }

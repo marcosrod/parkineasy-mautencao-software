@@ -10,6 +10,12 @@ import { VagaResponse } from './vaga-response';
 import { PagamentoRequest } from './pagamento-request';
 import { PagamentoResponse } from './pagamento-response';
 
+interface listaVagas {
+  codigo: string;
+  ocupada: boolean;
+  descricao: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class VagasService {
   private apiServerUrl = environment.apiBaseUrl;
@@ -26,6 +32,11 @@ export class VagasService {
   public listarVagasPorTipo(id: number) {
     return this.http.get<Array<string>>(
       `${this.apiServerUrl}/api/v1/gerencia/vagas/tipovaga/${id}`
+    );
+  }
+  public listarVagasOcupadas() {
+    return this.http.get<Array<listaVagas>>(
+      `${this.apiServerUrl}/api/v1/gerencia/vagas/ocupadas?ocupada=true`
     );
   }
 

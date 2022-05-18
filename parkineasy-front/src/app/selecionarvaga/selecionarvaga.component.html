@@ -38,48 +38,104 @@
 <div class="fundo">
   <div class="container">
     <mat-toolbar color="primary">
-      <span *ngIf="pageContent == 'initial'" class="titulo">Selecionar Vaga</span>
+      <span *ngIf="pageContent == 'initial'" class="titulo">Selecionar Vaga - {{vagaType}}</span>
       <span *ngIf="pageContent == 'ticket'" class="titulo">Impressão de Ticket</span>
       <span *ngIf="pageContent == 'comprovante'" class="titulo">Comprovante de Pagamento</span>
     </mat-toolbar>
 
   </div>
   <div class="centro">
-    <img
-      class="logo"
-      src="assets/images/parkicon.png"
-      width="70"
-      height="70"
-      alt="Parkineasy icon"
-    />
+
+    <div class="tipoVaga" >
+      <img *ngIf="vagaType == 'Comum'" src="assets/images/comum.png" alt="" style="height: 75px; width: 75px; align-self: center;">
+      <img *ngIf="vagaType == 'Idoso'" src="assets/images/idoso.png" alt="" style="height: 75px; width: 75px; align-self: center;">
+      <img *ngIf="vagaType == 'Deficiente'" src="assets/images/deficiente.png" alt="" style="height: 75px; width: 75px; align-self: center;">
+    </div>
+
     <form *ngIf="pageContent == 'initial'" #addForm="ngForm" (ngSubmit)="confirmar(addForm)">
       <mat-form-field class="selecionarVaga" appearance="fill">
         <mat-label>Selecione uma Vaga</mat-label>
-        <mat-select ngModel name="codigoVaga">
+        <mat-select ngModel name="codigoVaga" (selectionChange)= escolherVaga($event.value)>
           <mat-option *ngFor="let vaga of listaVagas" [value]="vaga">
             {{ vaga }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div>
-        <button
-          id="selecionar-vaga"
-          type="submit"
-          class="btn-confirmar-selecao"
-          mat-raised-button
-          color="primary"
-        >
-          Confirmar
-        </button>
+
+      <div class="mapWrapper" >
+        <div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A01') ? '#2196F3' : listaVagas.includes('A01') ? '#4CAF50' : vagasOcupadas.includes('A01') ? '#D32F2F' : '#607D8B'}">A01</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A02') ? '#2196F3' : listaVagas.includes('A02') ? '#4CAF50' : vagasOcupadas.includes('A02') ? '#D32F2F' : '#607D8B'}">A02</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A03') ? '#2196F3' : listaVagas.includes('A03') ? '#4CAF50' : vagasOcupadas.includes('A03') ? '#D32F2F' : '#607D8B'}">A03</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A04') ? '#2196F3' : listaVagas.includes('A04') ? '#4CAF50' : vagasOcupadas.includes('A04') ? '#D32F2F' : '#607D8B'}">A04</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A05') ? '#2196F3' : listaVagas.includes('A05') ? '#4CAF50' : vagasOcupadas.includes('A05') ? '#D32F2F' : '#607D8B'}">A05</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A06') ? '#2196F3' : listaVagas.includes('A06') ? '#4CAF50' : vagasOcupadas.includes('A06') ? '#D32F2F' : '#607D8B'}">A06</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A07') ? '#2196F3' : listaVagas.includes('A07') ? '#4CAF50' : vagasOcupadas.includes('A07') ? '#D32F2F' : '#607D8B'}">A07</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A08') ? '#2196F3' : listaVagas.includes('A08') ? '#4CAF50' : vagasOcupadas.includes('A08') ? '#D32F2F' : '#607D8B'}">A08</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A09') ? '#2196F3' : listaVagas.includes('A09') ? '#4CAF50' : vagasOcupadas.includes('A09') ? '#D32F2F' : '#607D8B'}">A09</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='A10') ? '#2196F3' : listaVagas.includes('A10') ? '#4CAF50' : vagasOcupadas.includes('A10') ? '#D32F2F' : '#607D8B'}">A10</div>
+        </div>
+       
+        <div class="doubleColumn">
+          <div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B01') ? '#2196F3' : listaVagas.includes('B01') ? '#4CAF50' : '#607D8B'}">B01</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B02') ? '#2196F3' : listaVagas.includes('B02') ? '#4CAF50' : '#607D8B'}">B02</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B03') ? '#2196F3' : listaVagas.includes('B03') ? '#4CAF50' : '#607D8B'}">B03</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B04') ? '#2196F3' : listaVagas.includes('B04') ? '#4CAF50' : '#607D8B'}">B04</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B05') ? '#2196F3' : listaVagas.includes('B05') ? '#4CAF50' : '#607D8B'}">B05</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B06') ? '#2196F3' : listaVagas.includes('B06') ? '#4CAF50' : '#607D8B'}">B06</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B07') ? '#2196F3' : listaVagas.includes('B07') ? '#4CAF50' : '#607D8B'}">B07</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B08') ? '#2196F3' : listaVagas.includes('B08') ? '#4CAF50' : '#607D8B'}">B08</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B09') ? '#2196F3' : listaVagas.includes('B09') ? '#4CAF50' : '#607D8B'}">B09</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='B10') ? '#2196F3' : listaVagas.includes('B10') ? '#4CAF50' : '#607D8B'}">B10</div>
+          </div>
+          <div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C01') ? '#2196F3' : listaVagas.includes('C01') ? '#4CAF50' : '#607D8B'}">C01</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C02') ? '#2196F3' : listaVagas.includes('C02') ? '#4CAF50' : '#607D8B'}">C02</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C03') ? '#2196F3' : listaVagas.includes('C03') ? '#4CAF50' : '#607D8B'}">C03</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C04') ? '#2196F3' : listaVagas.includes('C04') ? '#4CAF50' : '#607D8B'}">C04</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C05') ? '#2196F3' : listaVagas.includes('C05') ? '#4CAF50' : '#607D8B'}">C05</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C06') ? '#2196F3' : listaVagas.includes('C06') ? '#4CAF50' : '#607D8B'}">C06</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C07') ? '#2196F3' : listaVagas.includes('C07') ? '#4CAF50' : '#607D8B'}">C07</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C08') ? '#2196F3' : listaVagas.includes('C08') ? '#4CAF50' : '#607D8B'}">C08</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C09') ? '#2196F3' : listaVagas.includes('C09') ? '#4CAF50' : '#607D8B'}">C09</div>
+            <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='C10') ? '#2196F3' : listaVagas.includes('C10') ? '#4CAF50' : '#607D8B'}">C10</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D01') ? '#2196F3' : listaVagas.includes('D01') ? '#4CAF50' : '#607D8B'}">D01</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D02') ? '#2196F3' : listaVagas.includes('D02') ? '#4CAF50' : '#607D8B'}">D02</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D03') ? '#2196F3' : listaVagas.includes('D03') ? '#4CAF50' : '#607D8B'}">D03</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D04') ? '#2196F3' : listaVagas.includes('D04') ? '#4CAF50' : '#607D8B'}">D04</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D05') ? '#2196F3' : listaVagas.includes('D05') ? '#4CAF50' : '#607D8B'}">D05</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D06') ? '#2196F3' : listaVagas.includes('D06') ? '#4CAF50' : '#607D8B'}">D06</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D07') ? '#2196F3' : listaVagas.includes('D07') ? '#4CAF50' : '#607D8B'}">D07</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D08') ? '#2196F3' : listaVagas.includes('D08') ? '#4CAF50' : '#607D8B'}">D08</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D09') ? '#2196F3' : listaVagas.includes('D09') ? '#4CAF50' : '#607D8B'}">D09</div>
+          <div class="spotVaga" [ngStyle]="{'background-color': (chosenVaga=='D10') ? '#2196F3' : listaVagas.includes('D10') ? '#4CAF50' : '#607D8B'}">D10</div>
+        </div>
+      </div>
+
+      <div class="btn-wrapper">
         <button
           (click)="voltar()"
           id="voltar-selecao"
-          class="btn-voltar"
           mat-raised-button
+          class="btn-form"
           color="primary"
         >
           Voltar
         </button>
+        <button
+        id="selecionar-vaga"
+        type="submit"
+        mat-raised-button
+        class="btn-form"
+        color="primary"
+      >
+        Confirmar
+      </button>
       </div>
     </form>
 

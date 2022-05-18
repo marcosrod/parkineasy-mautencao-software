@@ -39,6 +39,8 @@ export class SelecionarvagaComponent implements OnInit {
     metodoPagamento: ''
   }
   public ticketValue = 0;
+  public vagasOcupadas: string[] = [];
+
   constructor(
     private vagasService: VagasService,
     private route: ActivatedRoute,
@@ -47,6 +49,8 @@ export class SelecionarvagaComponent implements OnInit {
     this.id = 0;
     this.listaVagas = [];
   }
+  public vagaType = window.history.state.vagaType;
+  public chosenVaga = '';
 
   ngOnInit(): void {
     this.sub = this.route.params.subscribe((params) => {
@@ -55,6 +59,13 @@ export class SelecionarvagaComponent implements OnInit {
     this.vagasService.listarVagasPorTipo(this.id).subscribe((params) => {
       this.listaVagas = params;
     });
+    this.vagasService.listarVagasOcupadas().subscribe((values) => {
+      this.vagasOcupadas = values.map(item => item.codigo)
+    });
+  }
+
+  escolherVaga(value: any): void{
+    this.chosenVaga = value;
   }
 
   voltar(): void {
@@ -102,6 +113,7 @@ export class SelecionarvagaComponent implements OnInit {
   }
 
   confirmar(addForm: NgForm): boolean {
+    console.log(addForm)
     this.vagasService.confirmarTicket(addForm.value).subscribe({
       next: (response: TicketResponse) => {
         let dataHora = new Date(response.dataHora);
