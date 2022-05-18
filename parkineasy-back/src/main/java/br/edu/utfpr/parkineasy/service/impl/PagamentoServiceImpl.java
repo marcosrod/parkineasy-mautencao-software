@@ -62,6 +62,10 @@ public class PagamentoServiceImpl implements PagamentoService {
         var horarioAtual = LocalDateTime.now().toLocalTime().toSecondOfDay();
         var horasGastas = ((horarioAtual-horarioTicket) / 60) / 60;
         
+        if (horasGastas < 1) {
+            return 3.50;
+        }
+        
         return (double) (5 * horasGastas);
     }
 }
