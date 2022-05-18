@@ -5,6 +5,7 @@ import br.edu.utfpr.parkineasy.model.Pagamento;
 import br.edu.utfpr.parkineasy.model.Ticket;
 import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.model.enumeration.EMetodoPagamento;
+import br.edu.utfpr.parkineasy.repository.CaixaRepository;
 import br.edu.utfpr.parkineasy.repository.PagamentoRepository;
 import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
@@ -34,11 +35,14 @@ public class PagamentoServiceTest {
     @Mock
     private PagamentoRepository pagamentoRepository;
     
+    @Mock
+    private CaixaRepository caixaRepository;
+    
     private PagamentoService pagamentoService;
 
     @BeforeEach
     void setUp() {
-        pagamentoService = new PagamentoServiceImpl(ticketRepository, vagaRepository, pagamentoRepository);
+        pagamentoService = new PagamentoServiceImpl(ticketRepository, vagaRepository, pagamentoRepository, caixaRepository);
     }
 
     private static Pagamento getPagamentoOf(Long id, Double valor,
@@ -48,7 +52,6 @@ public class PagamentoServiceTest {
             .dataHora(LocalDateTime.now())
             .valor(valor)
             .metodoPagamento(metodoPagamento)
-            .vaga(Vaga.builder().codigo(codigoVaga).build())
             .ticket(Ticket.builder().id(idTicket).build())
             .build();
     }

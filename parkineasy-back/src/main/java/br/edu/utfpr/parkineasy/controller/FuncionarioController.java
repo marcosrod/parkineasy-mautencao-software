@@ -1,17 +1,13 @@
 package br.edu.utfpr.parkineasy.controller;
 
+import br.edu.utfpr.parkineasy.dto.CaixaResponse;
 import br.edu.utfpr.parkineasy.dto.request.FuncionarioRequest;
 import br.edu.utfpr.parkineasy.dto.response.FuncionarioResponse;
 import br.edu.utfpr.parkineasy.service.FuncionarioService;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/gerencia/funcionarios")
@@ -31,5 +27,10 @@ public class FuncionarioController {
     @ResponseStatus(HttpStatus.CREATED)
     public FuncionarioResponse criarFuncionario(@RequestBody @Valid FuncionarioRequest funcionarioRequest) {
         return funcionarioService.criarFuncionario(funcionarioRequest);
+    }
+    
+    @GetMapping("{tipoVaga}/caixa")
+    public CaixaResponse getCaixa(@PathVariable Integer tipoVaga) {
+        return funcionarioService.getCaixa(tipoVaga);
     }
 }

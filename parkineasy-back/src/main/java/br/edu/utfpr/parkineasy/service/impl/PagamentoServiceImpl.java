@@ -3,7 +3,9 @@ package br.edu.utfpr.parkineasy.service.impl;
 import br.edu.utfpr.parkineasy.dto.request.PagamentoRequest;
 import br.edu.utfpr.parkineasy.dto.response.PagamentoResponse;
 import br.edu.utfpr.parkineasy.exception.ParkineasyException;
+import br.edu.utfpr.parkineasy.model.Caixa;
 import br.edu.utfpr.parkineasy.model.Pagamento;
+import br.edu.utfpr.parkineasy.repository.CaixaRepository;
 import br.edu.utfpr.parkineasy.repository.PagamentoRepository;
 import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
@@ -17,11 +19,14 @@ public class PagamentoServiceImpl implements PagamentoService {
     private final TicketRepository ticketRepository;
     private final VagaRepository vagaRepository;
     private final PagamentoRepository pagamentoRepository;
+    private final CaixaRepository caixaRepository;
 
-    public PagamentoServiceImpl(TicketRepository ticketRepository, VagaRepository vagaRepository, PagamentoRepository pagamentoRepository) {
+    public PagamentoServiceImpl(TicketRepository ticketRepository, VagaRepository vagaRepository, PagamentoRepository pagamentoRepository,
+                                CaixaRepository caixaRepository) {
         this.ticketRepository = ticketRepository;
         this.vagaRepository = vagaRepository;
         this.pagamentoRepository = pagamentoRepository;
+        this.caixaRepository = caixaRepository;
     }
 
     @Override
@@ -37,6 +42,13 @@ public class PagamentoServiceImpl implements PagamentoService {
             .valor(pagamentoRequest.getValor())
             .build();
         var pagamentoRealizado = pagamentoRepository.save(pagamento);
+        var caixa = Caixa.builder()
+                .dataPagamento(pagamento.getDataHora().toLocalDate())
+                    .valor(pagamento.getValor())
+                        .tipoVaga(vaga.getTipoVaga())
+                            .pagamento(pagamentoRealizado)
+                                .build();
+        var caixaSalvo = caixaRepository.save(caixa);
         vaga.setOcupada(false);
         vagaRepository.save(vaga);
         

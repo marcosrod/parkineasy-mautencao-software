@@ -14,4 +14,6 @@ public interface VagaService {
     void ocuparVaga(String codigo);
     
     List<VagaResponse> listarTodasOrdenadas();
+    
+    List<VagaResponse> listarTodasOcupadas(Boolean ocupada);
 }

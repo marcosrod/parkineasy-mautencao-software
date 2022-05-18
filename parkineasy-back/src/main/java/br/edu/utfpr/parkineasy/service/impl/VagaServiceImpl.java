@@ -63,4 +63,12 @@ public class VagaServiceImpl implements VagaService {
             .map(VagaResponse::new)
             .collect(Collectors.toList());
     }
+
+    @Override
+    public List<VagaResponse> listarTodasOcupadas(Boolean ocupada) {
+        return vagaRepository.findAllByOcupada(ocupada)
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+    }
 }

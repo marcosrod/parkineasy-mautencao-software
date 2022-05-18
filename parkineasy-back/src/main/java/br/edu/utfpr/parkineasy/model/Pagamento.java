@@ -32,4 +32,7 @@ public class Pagamento {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_TICKET", referencedColumnName = "id")
     private Ticket ticket;
+
+    @OneToOne(mappedBy = "pagamento")
+    private Caixa caixa;
 }

@@ -24,10 +24,20 @@ CREATE TABLE IF NOT EXISTS  ticket (
     
 CREATE TABLE IF NOT EXISTS pagamento (
   id bigint NOT NULL AUTO_INCREMENT,
-  data_hora date NOT NULL,
+  data_hora TIMESTAMP NOT NULL,
   valor decimal(8,2) NOT NULL,
   metodo_pagamento int NOT NULL,
   id_ticket bigint NOT NULL,
   PRIMARY KEY (id),
   CONSTRAINT pagamento_ibfk_1 FOREIGN KEY (id_ticket) REFERENCES ticket (id)
+);
+
+CREATE TABLE IF NOT EXISTS caixa (
+  id bigint NOT NULL AUTO_INCREMENT,
+  data_pagamento date NOT NULL,
+  valor decimal(8,2) NOT NULL,
+  tipo_vaga int NOT NULL,
+  id_pagamento bigint NOT NULL,
+  PRIMARY KEY (id),
+  CONSTRAINT caixa_ibfk_1 FOREIGN KEY (id_pagamento) REFERENCES pagamento (id)
 );

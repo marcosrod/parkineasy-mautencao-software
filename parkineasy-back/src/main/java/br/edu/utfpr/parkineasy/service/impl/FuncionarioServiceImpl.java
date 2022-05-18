@@ -1,10 +1,16 @@
 package br.edu.utfpr.parkineasy.service.impl;
 
+import br.edu.utfpr.parkineasy.dto.CaixaResponse;
 import br.edu.utfpr.parkineasy.dto.request.FuncionarioRequest;
 import br.edu.utfpr.parkineasy.dto.response.FuncionarioResponse;
+import br.edu.utfpr.parkineasy.model.Caixa;
 import br.edu.utfpr.parkineasy.model.Funcionario;
+import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
+import br.edu.utfpr.parkineasy.repository.CaixaRepository;
 import br.edu.utfpr.parkineasy.repository.FuncionarioRepository;
 import br.edu.utfpr.parkineasy.service.FuncionarioService;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -16,10 +22,13 @@ import org.springframework.stereotype.Service;
 public class FuncionarioServiceImpl implements FuncionarioService {
     private final FuncionarioRepository funcionarioRepository;
     private final PasswordEncoder passwordEncoder;
+    
+    private final CaixaRepository caixaRepository;
 
-    public FuncionarioServiceImpl(FuncionarioRepository funcionarioRepository, PasswordEncoder passwordEncoder) {
+    public FuncionarioServiceImpl(FuncionarioRepository funcionarioRepository, PasswordEncoder passwordEncoder, CaixaRepository caixaRepository) {
         this.funcionarioRepository = funcionarioRepository;
         this.passwordEncoder = passwordEncoder;
+        this.caixaRepository = caixaRepository;
     }
 
     @Override
@@ -46,6 +55,19 @@ public class FuncionarioServiceImpl implements FuncionarioService {
             funcionarioRequest.getUsuario()
         );
         return new FuncionarioResponse(funcionarioRepository.save(funcionario));
+    }
+
+    @Override
+    public CaixaResponse getCaixa(Integer tipoVaga) {
+        var valorTotal = caixaRepository.findAllByDataPagamentoAndTipoVaga(LocalDate.now(), tipoVaga).stream()
+            .map(Caixa::getValor)
+            .mapToDouble(Double::doubleValue)
+                .sum();
+        
+        return CaixaResponse.builder()
+            .dataReferencia(LocalDate.now())
+            .totalCaixa(valorTotal)
+            .tipoVaga(TipoVaga.valueOf(tipoVaga)).build();
     }
 
     private String codificarSenha(String senha) {

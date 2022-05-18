@@ -10,4 +10,6 @@ public interface VagaRepository extends JpaRepository<Vaga, String> {
     List<Vaga> findAllByTipoVagaAndOcupada(Integer id, Boolean ocupada);
     
     List<Vaga> findAllByOrderByCodigoAsc();
+    
+    List<Vaga> findAllByOcupada(Boolean ocupada);
 }

@@ -3,6 +3,7 @@ package br.edu.utfpr.parkineasy.service;
 import br.edu.utfpr.parkineasy.dto.request.FuncionarioRequest;
 import br.edu.utfpr.parkineasy.dto.response.FuncionarioResponse;
 import br.edu.utfpr.parkineasy.model.Funcionario;
+import br.edu.utfpr.parkineasy.repository.CaixaRepository;
 import br.edu.utfpr.parkineasy.repository.FuncionarioRepository;
 import br.edu.utfpr.parkineasy.service.impl.FuncionarioServiceImpl;
 import java.util.List;
@@ -31,6 +32,9 @@ class FuncionarioServiceTest {
     private FuncionarioRepository funcionarioRepository;
 
     private FuncionarioService funcionarioService;
+    
+    @Mock
+    private CaixaRepository caixaRepository;
 
     private static Funcionario getFuncionarioOf(Long id, String nome, String email, String senha, String usuario) {
         Funcionario funcionario = new Funcionario();
@@ -44,7 +48,7 @@ class FuncionarioServiceTest {
 
     @BeforeEach
     void setUp() {
-        funcionarioService = new FuncionarioServiceImpl(funcionarioRepository, new BCryptPasswordEncoder());
+        funcionarioService = new FuncionarioServiceImpl(funcionarioRepository, new BCryptPasswordEncoder(), caixaRepository);
     }
 
     @Test
