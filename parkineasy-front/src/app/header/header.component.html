@@ -9,6 +9,10 @@
       </div>
 
       <div class="col" *ngIf="authService.isAuthenticated()">
+        <a href="/gerencia/funcionarios/mapa" class="logout btn btn-default"
+          >Mapa de Vagas</a>
+      </div>
+      <div class="col" *ngIf="authService.isAuthenticated()">
         <a href="/gerencia/vagas/cadastro" class="logout btn btn-default"
           >Cadastrar vagas</a
         >

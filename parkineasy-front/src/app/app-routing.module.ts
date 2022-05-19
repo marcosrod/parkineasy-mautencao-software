@@ -8,12 +8,18 @@ import { HomeComponent } from './home/home.component';
 import { VagasComponent } from './vagas/vagas.component';
 import {SelecionarvagaComponent} from "./selecionarvaga/selecionarvaga.component";
 import { TiposvagasComponent } from './tiposvagas/tiposvagas.component';
+import { RelatoriovagasComponent } from './relatoriovagas/relatoriovagas.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'gerencia/funcionarios/mapa',
+    component: RelatoriovagasComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'gerencia/vagas/cadastro',
     component: VagasComponent,
