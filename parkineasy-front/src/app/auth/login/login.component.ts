@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginRequest).subscribe((data) => {
       if (data) {
         console.log('Sucesso ao realizar o login');
-        this.router.navigateByUrl('gerencia/funcionarios/cadastro');
+        this.router.navigateByUrl('gerencia/funcionarios/mapa');
       } else {
         console.log('Falha ao realizar o login');
       }
