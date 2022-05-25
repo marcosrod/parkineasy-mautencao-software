@@ -21,6 +21,12 @@ export interface editVagaProps {
   tipo: number
 }
 
+export interface caixaObj {
+  totalCaixa: number;
+  dataReferencia: Date;
+  tipoVaga: string;
+}
+
 @Injectable({ providedIn: 'root' })
 export class VagasService {
   private apiServerUrl = environment.apiBaseUrl;
@@ -62,6 +68,12 @@ export class VagasService {
   public listarVagasOrdenadasPrefixo() {
     return this.http.get<Array<listaVagas>>(
       `${this.apiServerUrl}/api/v1/gerencia/vagas/ordenadas-por-prefixo`
+    );
+  }
+
+  public listarCaixa(tipo: string) {
+    return this.http.get<caixaObj>(
+      `${this.apiServerUrl}/api/v1/gerencia/funcionarios/${tipo}/caixa`
     );
   }
 

@@ -23,6 +23,7 @@ import { VagasComponent } from './vagas/vagas.component';
 import { SelecionarvagaComponent } from './selecionarvaga/selecionarvaga.component';
 import { TiposvagasComponent } from './tiposvagas/tiposvagas.component';
 import { RelatoriovagasComponent } from './relatoriovagas/relatoriovagas.component';
+import { CaixaComponent } from './caixa/caixa.component';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { RelatoriovagasComponent } from './relatoriovagas/relatoriovagas.compone
     SelecionarvagaComponent,
     TiposvagasComponent,
     RelatoriovagasComponent,
+    CaixaComponent,
   ],
   imports: [
     BrowserModule,

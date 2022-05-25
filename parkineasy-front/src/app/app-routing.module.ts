@@ -9,6 +9,7 @@ import { VagasComponent } from './vagas/vagas.component';
 import {SelecionarvagaComponent} from "./selecionarvaga/selecionarvaga.component";
 import { TiposvagasComponent } from './tiposvagas/tiposvagas.component';
 import { RelatoriovagasComponent } from './relatoriovagas/relatoriovagas.component';
+import { CaixaComponent } from './caixa/caixa.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,11 @@ const routes: Routes = [
   {
     path: 'gerencia/funcionarios/mapa',
     component: RelatoriovagasComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'gerencia/funcionarios/caixa',
+    component: CaixaComponent,
     canActivate: [AuthGuard],
   },
   {

@@ -1,0 +1,32 @@
+<div>
+    <div class="centro">
+      <div class="container">
+        <span class="titulo">Relatório de Caixa</span>
+      </div>
+      <img
+        class="logo"
+        src="assets/images/parkicon.png"
+        width="70"
+        height="70"
+        alt="Parkineasy icon"
+      />
+
+      <h2 class="middleText">{{todayDate}}</h2>
+      <div class="mapWrapper" >
+          <div class="dataColumn">
+              <h2>Comum</h2>
+              <h3 class="middleText">R$ {{caixaCom.totalCaixa}}</h3>
+          </div>
+          <div class="dataColumn">
+            <h2>Deficiente</h2>
+            <h3 class="middleText">R$ {{caixaDef.totalCaixa}}</h3>
+        </div>
+        <div class="dataColumn">
+            <h2>Idoso</h2>
+            <h3 class="middleText">R$ {{caixaIdo.totalCaixa}}</h3>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  

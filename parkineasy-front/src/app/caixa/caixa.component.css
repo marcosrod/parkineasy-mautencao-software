@@ -1,0 +1,54 @@
+.titulo {
+    text-align: center;
+    font-size: 35px;
+    color: #FFF;
+    line-height: 35px;
+  }
+  
+  .container {
+    background-color: rgb(63, 81, 181);
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1;
+    box-shadow: 0 2px 2px 1px rgba(63, 81, 181, 0.2);
+    margin-bottom: 15px;
+  }
+  
+    .centro {
+      flex: 1;
+      width: clamp(350px,750px,90%);
+      background-color: #f1f1f1;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: black;
+      margin-top: 5vh;
+      position: relative;
+      box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
+    }
+  
+    .logo {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 15px;
+    }
+  
+    .middleText{
+        text-align: center;
+        color: #2c344c;
+    }
+
+    /* Estilos Mapinha */
+  .mapWrapper {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+      margin: 20px;
+      color: #2c344c;
+    }
+    
+    .doubleColumn {
+      display: flex;
+      gap: 5px
+    }
