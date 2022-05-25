@@ -18,7 +18,7 @@ export interface listaVagas {
 
 export interface editVagaProps {
   cod: string;
-  tipo: string
+  tipo: number
 }
 
 @Injectable({ providedIn: 'root' })
@@ -34,11 +34,8 @@ export class VagasService {
     );
   }
 
-  public editVaga({cod, tipo}: editVagaProps): Observable<VagaResponse> {
-    return this.http.put<any>(
-      `${this.apiServerUrl}/api/v1/gerencia/vagas/${cod}/alterar`,
-      {tipo}
-    );
+  public editVaga({cod, tipo}: editVagaProps){
+    return this.http.put(`${this.apiServerUrl}/api/v1/gerencia/vagas/${cod}/alterar?tipo=${tipo}`,{});
   }
 
   public delVaga(cod: string) {
@@ -59,6 +56,12 @@ export class VagasService {
   public listarVagasOrdenadas() {
     return this.http.get<Array<listaVagas>>(
       `${this.apiServerUrl}/api/v1/gerencia/vagas/ordenadas`
+    );
+  }
+
+  public listarVagasOrdenadasPrefixo() {
+    return this.http.get<Array<listaVagas>>(
+      `${this.apiServerUrl}/api/v1/gerencia/vagas/ordenadas-por-prefixo`
     );
   }
 

@@ -67,7 +67,7 @@ export class VagasComponent {
     console.log('edit')
     const objVaga = {
       cod: addForm.value.codigoVaga,
-      tipo: addForm.value.tipo
+      tipo: +addForm.value.tipo
     }
     this.vagasService.editVaga(objVaga).subscribe({
       next: (response: any) => {
