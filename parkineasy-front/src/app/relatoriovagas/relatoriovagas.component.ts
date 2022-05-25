@@ -14,10 +14,15 @@ export class RelatoriovagasComponent implements OnInit {
   public vagasDefOp: string[] = []
   public vagasIdo: string[] = []
   public vagasIdoOp: string[] = []
+  public vagasGerais: any[] = []
 
   constructor(private vagasService: VagasService,) { }
 
   ngOnInit(): void {
+    this.vagasService.listarVagasOrdenadasPrefixo().subscribe((values) => {
+      this.vagasGerais = [...values]
+      console.log(values)
+    });
     this.vagasService.listarVagasOrdenadas().subscribe((values) => {
       values.forEach(vaga => {
         if(vaga.descricao === 'COMUM'){
@@ -43,6 +48,22 @@ export class RelatoriovagasComponent implements OnInit {
 
       })
     });
+  }
+
+  setVagaCor(vaga: any): string {
+    if(vaga.descricao == 'COMUM'){
+      return this.vagasComum.includes(vaga.codigo) ? '#009688' : '#80CBC4'
+    }
+
+    if(vaga.descricao == 'DEFICIENTE'){
+      return this.vagasDef.includes(vaga.codigo) ? '#3F51B5' : '#9FA8DA'
+    }
+
+    if(vaga.descricao == 'IDOSO'){
+      return this.vagasIdo.includes(vaga.codigo) ? '#673AB7' : '#B39DDB'
+    }
+    
+    return ''
   }
 
 }

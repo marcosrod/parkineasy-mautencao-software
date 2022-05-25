@@ -28,56 +28,20 @@
 
       <div class="mapWrapper" >
         <div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A01') ? '#009688' : '#80CBC4'}">A01</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasDef.includes('A02') ? '#3F51B5' : '#9FA8DA'}">A02</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A03') ? '#009688' : '#80CBC4'}">A03</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A04') ? '#009688' : '#80CBC4'}">A04</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasIdo.includes('A05') ? '#673AB7' : '#B39DDB'}">A05</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A06') ? '#009688' : '#80CBC4'}">A06</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A07') ? '#009688' : '#80CBC4'}">A07</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A08') ? '#009688' : '#80CBC4'}">A08</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A09') ? '#009688' : '#80CBC4'}">A09</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('A10') ? '#009688' : '#80CBC4'}">A10</div>
+          <div class="spotVaga" *ngFor="let vaga of vagasGerais[0]" [ngStyle]="{'background-color': setVagaCor(vaga)}">{{vaga.codigo}}</div>
         </div>
        
         <div class="doubleColumn">
           <div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B01') ? '#009688' : '#80CBC4'}">B01</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasDef.includes('B02') ? '#3F51B5' : '#9FA8DA'}">B02</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B03') ? '#009688' : '#80CBC4'}">B03</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B04') ? '#009688' : '#80CBC4'}">B04</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasIdo.includes('B05') ? '#673AB7' : '#B39DDB'}">B05</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B06') ? '#009688' : '#80CBC4'}">B06</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B07') ? '#009688' : '#80CBC4'}">B07</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B08') ? '#009688' : '#80CBC4'}">B08</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B09') ? '#009688' : '#80CBC4'}">B09</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('B10') ? '#009688' : '#80CBC4'}">B10</div>
+            <div class="spotVaga" *ngFor="let vaga of vagasGerais[1]" [ngStyle]="{'background-color': setVagaCor(vaga)}">{{vaga.codigo}}</div>
           </div>
           <div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C01') ? '#009688' : '#80CBC4'}">C01</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasDef.includes('C02') ? '#3F51B5' : '#9FA8DA'}">C02</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C03') ? '#009688' : '#80CBC4'}">C03</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C04') ? '#009688' : '#80CBC4'}">C04</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasIdo.includes('C05') ? '#673AB7' : '#B39DDB'}">C05</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C06') ? '#009688' : '#80CBC4'}">C06</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C07') ? '#009688' : '#80CBC4'}">C07</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C08') ? '#009688' : '#80CBC4'}">C08</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C09') ? '#009688' : '#80CBC4'}">C09</div>
-            <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('C10') ? '#009688' : '#80CBC4'}">C10</div>
+            <div class="spotVaga" *ngFor="let vaga of vagasGerais[2]" [ngStyle]="{'background-color': setVagaCor(vaga)}">{{vaga.codigo}}</div>
           </div>
         </div>
 
         <div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D01') ? '#009688' : '#80CBC4'}">D01</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasDef.includes('D02') ? '#3F51B5' : '#9FA8DA'}">D02</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D03') ? '#009688' : '#80CBC4'}">D03</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D04') ? '#009688' : '#80CBC4'}">D04</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasIdo.includes('D05') ? '#673AB7' : '#B39DDB'}">D05</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D06') ? '#009688' : '#80CBC4'}">D06</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D07') ? '#009688' : '#80CBC4'}">D07</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D08') ? '#009688' : '#80CBC4'}">D08</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D09') ? '#009688' : '#80CBC4'}">D09</div>
-          <div class="spotVaga" [ngStyle]="{'background-color': vagasComum.includes('D10') ? '#009688' : '#80CBC4'}">D10</div>
+          <div class="spotVaga" *ngFor="let vaga of vagasGerais[3]" [ngStyle]="{'background-color': setVagaCor(vaga)}">{{vaga.codigo}}</div>
         </div>
       </div>
     </div>

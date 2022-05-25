@@ -40,6 +40,7 @@ export class SelecionarvagaComponent implements OnInit {
   }
   public ticketValue = 0;
   public vagasOcupadas: string[] = [];
+  public vagasGerais: any[] = [];
 
   constructor(
     private vagasService: VagasService,
@@ -61,6 +62,9 @@ export class SelecionarvagaComponent implements OnInit {
     });
     this.vagasService.listarVagasOcupadas().subscribe((values) => {
       this.vagasOcupadas = values.map(item => item.codigo)
+    });
+    this.vagasService.listarVagasOrdenadasPrefixo().subscribe((values) => {
+      this.vagasGerais = [...values]
     });
   }
 

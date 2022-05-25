@@ -28,6 +28,27 @@
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
 }
 
+.legenda {
+  width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 0 15px;
+}
+
+.legBox {
+  height: 20px;
+  width: 20px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.legendaWrapper {
+    display: flex;
+    gap: 10px;
+    min-width: 150px
+}
+
 .tipoVaga {
   width: 100%;
   display: flex;
