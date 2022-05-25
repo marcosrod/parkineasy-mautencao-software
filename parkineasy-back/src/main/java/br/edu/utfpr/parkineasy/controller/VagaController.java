@@ -42,4 +42,14 @@ public class VagaController {
     public List<VagaResponse> listarTodasOcupadas(@RequestParam Boolean ocupada) {
         return vagaService.listarTodasOcupadas(ocupada);
     }
+    
+    @PutMapping("{codigoVaga}/alterar")
+    public VagaResponse alterarVaga(@RequestParam Integer tipo, @PathVariable String codigoVaga) {
+        return vagaService.atualizarVaga(tipo, codigoVaga);
+    }
+    
+    @DeleteMapping("{codigoVaga}/excluir")
+    public void excluirVaga(@PathVariable String codigoVaga) {
+        vagaService.excluirVaga(codigoVaga);
+    }
 }

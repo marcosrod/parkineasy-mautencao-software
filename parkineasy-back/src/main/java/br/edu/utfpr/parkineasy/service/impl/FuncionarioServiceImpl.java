@@ -1,6 +1,6 @@
 package br.edu.utfpr.parkineasy.service.impl;
 
-import br.edu.utfpr.parkineasy.dto.CaixaResponse;
+import br.edu.utfpr.parkineasy.dto.response.CaixaResponse;
 import br.edu.utfpr.parkineasy.dto.request.FuncionarioRequest;
 import br.edu.utfpr.parkineasy.dto.response.FuncionarioResponse;
 import br.edu.utfpr.parkineasy.model.Caixa;

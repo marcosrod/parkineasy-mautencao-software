@@ -1,4 +1,4 @@
-package br.edu.utfpr.parkineasy.dto;
+package br.edu.utfpr.parkineasy.dto.response;
 
 import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
 import lombok.AllArgsConstructor;

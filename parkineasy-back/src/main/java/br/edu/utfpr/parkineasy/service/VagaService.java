@@ -10,7 +10,11 @@ public interface VagaService {
     List<String> listarPorTipoVaga(Integer id);
 
     VagaResponse criarVaga(VagaRequest vagaRequest);
-
+    
+    VagaResponse atualizarVaga(Integer tipo, String codigoVaga);
+    
+    void excluirVaga(String codigoVaga);
+    
     void ocuparVaga(String codigo);
     
     List<VagaResponse> listarTodasOrdenadas();
