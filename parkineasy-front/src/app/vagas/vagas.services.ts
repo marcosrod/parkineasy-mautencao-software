@@ -16,6 +16,11 @@ export interface listaVagas {
   descricao: string
 }
 
+export interface editVagaProps {
+  cod: string;
+  tipo: string
+}
+
 @Injectable({ providedIn: 'root' })
 export class VagasService {
   private apiServerUrl = environment.apiBaseUrl;
@@ -27,6 +32,18 @@ export class VagasService {
       `${this.apiServerUrl}/api/v1/gerencia/vagas`,
       vagaRequest
     );
+  }
+
+  public editVaga({cod, tipo}: editVagaProps): Observable<VagaResponse> {
+    return this.http.put<any>(
+      `${this.apiServerUrl}/api/v1/gerencia/vagas/${cod}/alterar`,
+      {tipo}
+    );
+  }
+
+  public delVaga(cod: string) {
+    return this.http.delete(
+      `${this.apiServerUrl}/api/v1/gerencia/vagas/${cod}/excluir`);
   }
 
   public listarVagasPorTipo(id: number) {

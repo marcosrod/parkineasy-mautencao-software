@@ -19,7 +19,6 @@ export class RelatoriovagasComponent implements OnInit {
 
   ngOnInit(): void {
     this.vagasService.listarVagasOrdenadas().subscribe((values) => {
-      console.log(values)
       values.forEach(vaga => {
         if(vaga.descricao === 'COMUM'){
           if(vaga.ocupada){

@@ -1,10 +1,15 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="fundo">
-  <div class="container">
-    <mat-toolbar color="primary">
-      <span class="titulo">Cadastrar Vagas</span>
-    </mat-toolbar>
-  </div>
   <div class="centro">
+    <div class="container">
+      <span class="titulo">{{vagaOpt}} Vaga</span>
+  </div>
+  <div class="options">
+    <i class="fa-solid fa-plus opIcon" [ngStyle]="{'background-color': vagaOpt === 'Criar' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Criar')"></i>
+    <i class="fa-solid fa-pen opIcon" [ngStyle]="{'background-color': vagaOpt === 'Editar' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Editar')"></i>
+    <i class="fa-solid fa-trash opIcon" [ngStyle]="{'background-color': vagaOpt === 'Excluir' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Excluir')"></i>
+  </div>
+
     <img
       class="logo"
       src="assets/images/parkicon.png"
@@ -12,7 +17,9 @@
       height="70"
       alt="Parkineasy icon"
     />
-    <form #addForm="ngForm" (ngSubmit)="onAddVaga(addForm)">
+
+    <form #addForm="ngForm" *ngIf="vagaOpt == 'Criar'" (ngSubmit)="onVaga(addForm)" >
+      <div class="formStyle">
       <mat-form-field
         class="IdVaga"
         hintLabel="Max 10 characters"
@@ -37,7 +44,8 @@
           <mat-option value="3">Idoso</mat-option>
         </mat-select>
       </mat-form-field>
-      <div>
+    </div>
+      <div class="buttons">
         <button
           id="criar-vaga"
           type="submit"
@@ -49,14 +57,65 @@
         </button>
       </div>
     </form>
-    <button
-      (click)="voltar()"
-      id="voltar-menu"
-      class="btn-voltar"
-      mat-raised-button
-      color="primary"
-    >
-      Voltar
-    </button>
+
+    <form #addForm="ngForm" *ngIf="vagaOpt == 'Editar'" (ngSubmit)="onVaga(addForm)" >
+      <div class="formStyle">
+        <mat-form-field class="selecionarVaga" appearance="fill">
+          <mat-label>Selecione uma Vaga</mat-label>
+          <mat-select ngModel name="codigoVaga" (selectionChange)="escolherVaga($event.value)">
+            <mat-option *ngFor="let vaga of listaVagas" [value]="vaga">
+              {{ vaga }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      <mat-form-field class="tipoVaga" appearance="fill">
+        <mat-label>Tipo da vaga</mat-label>
+        <mat-select ngModel name="tipo" (selectionChange)="escolherTipo($event.value)">
+          <mat-option value="1" >Comum</mat-option>
+          <mat-option value="2" >Deficiente</mat-option>
+          <mat-option value="3" >Idoso</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+      <div class="editButtons">
+        <div>
+          <h4>{{chosedVaga.codigo}}</h4>
+        <h4>{{chosedVaga.descricao}}</h4>
+        </div>
+        <button
+          id="criar-vaga"
+          type="submit"
+          class="btn-criar"
+          mat-raised-button
+          color="primary"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+
+    <form #addForm="ngForm" *ngIf="vagaOpt == 'Excluir'" (ngSubmit)="onVaga(addForm)" >
+      <div class="formStyle">
+        <mat-form-field class="selecionarVaga" appearance="fill">
+          <mat-label>Selecione uma Vaga</mat-label>
+          <mat-select ngModel name="codigoVaga" (selectionChange)= escolherVaga($event.value)>
+            <mat-option *ngFor="let vaga of listaVagas" [value]="vaga">
+              {{ vaga }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+      <div class="buttons">
+        <button
+          id="criar-vaga"
+          type="submit"
+          class="btn-criar"
+          mat-raised-button
+          color="primary"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
   </div>
 </div>

@@ -2,20 +2,31 @@
   text-align: center;
   flex: 1;
   font-size: 35px;
+  color: #FFF;
+}
 
+.container {
+  background-color: rgb(63, 81, 181);
+  display: flex;
+  justify-content: center;
+  padding: 15px 0;
+  border-bottom: 1;
+  box-shadow: 0 2px 2px 1px rgba(63, 81, 181, 0.2);
+  margin-bottom: 15px;
 }
 
 .centro {
   flex: 1;
-  height: 500px;
-  width: 1000px;
+  width: clamp(350px,80%,1000px);
   background-color: #f1f1f1;
   margin-left: auto;
   margin-right: auto;
+  margin-top: 5vh;
   box-shadow: black;
-  margin-top: 1%;
+  margin-top: 15vh;
   position: relative;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
+  padding-bottom: 30px;
 }
 
 .voltar {
@@ -51,11 +62,11 @@
 }
 
 .container-botoes{
-  width: 950px;
-  height: 300px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  flex-wrap: wrap;
   margin-top: 5%;
+  gap: 15px;
 }
 
 .Texto{
@@ -66,28 +77,19 @@
   font-weight: bold;
 }
 
-.comumimg{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .comum{
-  margin-left: 5%;
   background-color: #cecece;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
   cursor: pointer;
 }
 
 .idoso{
-  margin-left: 5%;
   background-color: #cecece;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
   cursor: pointer;
 }
 
 .deficiente{
-  margin-left: 5%;
   background-color: #cecece;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
   cursor: pointer;
