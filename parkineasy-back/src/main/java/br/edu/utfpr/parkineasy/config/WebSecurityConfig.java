@@ -44,6 +44,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/v1/gerencia/vagas/tipovaga/**").permitAll()
             .antMatchers("/api/v1/gerencia/vagas/ocupadas/**").permitAll()
             .antMatchers("/api/v1/gerencia/vagas/ordenadas/**").permitAll()
+            .antMatchers("/api/v1/gerencia/vagas/ordenadas-por-prefixo/**").permitAll()
             .antMatchers("/api/v1/tickets/**").permitAll()
             .anyRequest().authenticated();
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
