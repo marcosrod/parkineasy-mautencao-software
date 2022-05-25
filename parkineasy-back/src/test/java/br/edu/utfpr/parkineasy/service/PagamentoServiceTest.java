@@ -68,8 +68,9 @@ public class PagamentoServiceTest {
     
     @Test
     public void pagarTicket_deveRetornarComprovantePagamento_sePagamentoOk() {
-        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L).build()));
-        when(vagaRepository.findById("A01")).thenReturn(Optional.of(Vaga.builder().codigo("A01").build()));
+        when(ticketRepository.findById(1L)).thenReturn(Optional.of(Ticket.builder().id(1L)
+            .vaga(Vaga.builder().codigo("A01").tipoVaga(1).build()).build()));
+        when(vagaRepository.findById("A01")).thenReturn(Optional.of(Vaga.builder().codigo("A01").tipoVaga(1).build()));
         when(pagamentoRepository.save(any())).thenReturn(getPagamentoOf(1L, 15.20, 
             EMetodoPagamento.CARTAO, "A01", 1L));
         
