@@ -4,19 +4,21 @@
     <div class="container">
       <span class="titulo">{{vagaOpt}} Vaga</span>
   </div>
+  
+  <img
+  class="logo"
+  src="assets/images/parkicon.png"
+  width="70"
+  height="70"
+  alt="Parkineasy icon"
+/>
+
   <div class="options">
     <i class="fa-solid fa-plus opIcon" [ngStyle]="{'background-color': vagaOpt === 'Criar' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Criar')"></i>
     <i class="fa-solid fa-pen opIcon" [ngStyle]="{'background-color': vagaOpt === 'Editar' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Editar')"></i>
     <i class="fa-solid fa-trash opIcon" [ngStyle]="{'background-color': vagaOpt === 'Excluir' ? '#0092E4' : '#3F51B5' }" (click)="mudarOpt('Excluir')"></i>
   </div>
 
-    <img
-      class="logo"
-      src="assets/images/parkicon.png"
-      width="70"
-      height="70"
-      alt="Parkineasy icon"
-    />
 
     <form #addForm="ngForm" *ngIf="vagaOpt == 'Criar'" (ngSubmit)="onVaga(addForm)" >
       <div class="formStyle">
