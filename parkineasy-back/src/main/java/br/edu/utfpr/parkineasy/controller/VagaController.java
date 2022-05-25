@@ -37,6 +37,11 @@ public class VagaController {
     public List<VagaResponse> listarTodasOrdenadas() {
         return vagaService.listarTodasOrdenadas();
     }
+
+    @GetMapping("ordenadas-por-prefixo")
+    public List<List<VagaResponse>> listarTodasOrdenadasPorPrefixo() {
+        return vagaService.listarTodasOrdenadasPorPrefixo();
+    }
     
     @GetMapping("ocupadas")
     public List<VagaResponse> listarTodasOcupadas(@RequestParam Boolean ocupada) {

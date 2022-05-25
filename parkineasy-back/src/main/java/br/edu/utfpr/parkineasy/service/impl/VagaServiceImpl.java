@@ -115,6 +115,27 @@ public class VagaServiceImpl implements VagaService {
     }
 
     @Override
+    public List<List<VagaResponse>> listarTodasOrdenadasPorPrefixo() {
+        var listaA = vagaRepository.findAllByCodigoContaining("A")
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+        var listaB = vagaRepository.findAllByCodigoContaining("B")
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+        var listaC = vagaRepository.findAllByCodigoContaining("C")
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+        var listaD = vagaRepository.findAllByCodigoContaining("D")
+            .stream()
+            .map(VagaResponse::new)
+            .collect(Collectors.toList());
+        return List.of(listaA, listaB, listaC, listaD);
+    }
+
+    @Override
     public List<VagaResponse> listarTodasOcupadas(Boolean ocupada) {
         return vagaRepository.findAllByOcupada(ocupada)
             .stream()

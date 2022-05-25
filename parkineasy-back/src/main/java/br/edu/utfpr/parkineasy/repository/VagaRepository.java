@@ -14,4 +14,6 @@ public interface VagaRepository extends JpaRepository<Vaga, String> {
     List<Vaga> findAllByOcupada(Boolean ocupada);
     
     Long countByCodigoContaining(String codigo);
+    
+    List<Vaga> findAllByCodigoContaining(String codigo);
 }
