@@ -36,15 +36,13 @@
 </div>
 
 <div class="fundo">
-  <div class="container">
-    <mat-toolbar color="primary">
+  
+  <div class="centro">
+    <div class="container">
       <span *ngIf="pageContent == 'initial'" class="titulo">Selecionar Vaga - {{vagaType}}</span>
       <span *ngIf="pageContent == 'ticket'" class="titulo">Impressão de Ticket</span>
       <span *ngIf="pageContent == 'comprovante'" class="titulo">Comprovante de Pagamento</span>
-    </mat-toolbar>
-
   </div>
-  <div class="centro">
 
     <div class="tipoVaga" >
       <img *ngIf="vagaType == 'Comum'" src="assets/images/comum.png" alt="" style="height: 75px; width: 75px; align-self: center;">

@@ -1,14 +1,23 @@
 .titulo {
   text-align: center;
-  flex: 1;
   font-size: 35px;
-  margin-top: 5px;
+  color: #FFF;
+  line-height: 35px;
+}
+
+.container {
+  background-color: rgb(63, 81, 181);
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 1;
+  box-shadow: 0 2px 2px 1px rgba(63, 81, 181, 0.2);
+  margin-bottom: 15px;
 }
 
 .centro {
   flex: 1;
-  height: 300px;
-  width: 600px;
+  width: clamp(350px,600px,90%);
   background-color: #f1f1f1;
   margin-left: auto;
   margin-right: auto;
@@ -16,6 +25,29 @@
   margin-top: 10%;
   position: relative;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
+  padding-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #FFF;
+}
+
+.opIcon {
+  background-color: rgb(63, 81, 181);
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.formStyle {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 20px
 }
 
 .voltar {
@@ -23,29 +55,24 @@
   margin-right: 5%;
 }
 
-.btn-criar {
-  position: absolute;
-  bottom: 10%;
-  right: 16%;
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-right: 40px;
 }
 
-.btn-voltar {
-  position: absolute;
-  bottom: 10%;
-  left: 16%;
-}
-
-.IdVaga {
-  margin-top: 8%;
-  margin-left: 15%;
-}
-
-.tipoVaga {
-  margin-left: 2%;
+.editButtons {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 20px;
+  margin-right: 40px;
 }
 
 .logo {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 20px;
 }

@@ -1,18 +1,27 @@
 .titulo {
   text-align: center;
-  flex: 1;
   font-size: 35px;
-  margin-top: 10px;
+  color: #FFF;
+  line-height: 35px;
+}
+
+.container {
+  background-color: rgb(63, 81, 181);
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 1;
+  box-shadow: 0 2px 2px 1px rgba(63, 81, 181, 0.2);
+  margin-bottom: 15px;
 }
 
 .centro {
   flex: 1;
-  width: 600px;
+  width: clamp(375px, 600px, 95%);
   background-color: #f1f1f1;
   margin-left: auto;
   margin-right: auto;
   margin-top: 20px;
-  padding-top: 10px;
   padding-bottom: 10px;
   box-shadow: black;
   position: relative;

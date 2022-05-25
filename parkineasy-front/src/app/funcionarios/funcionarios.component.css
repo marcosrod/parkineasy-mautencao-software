@@ -1,14 +1,24 @@
 .titulo {
   text-align: center;
-  flex: 1;
   font-size: 35px;
-  margin-top: 5px;
+  color: #FFF;
+  line-height: 35px;
 }
+
+.container {
+  background-color: rgb(63, 81, 181);
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-bottom: 1;
+  box-shadow: 0 2px 2px 1px rgba(63, 81, 181, 0.2);
+  margin-bottom: 15px;
+}
+
 
 .centro {
   flex: 1;
-  height: 500px;
-  width: 600px;
+  width: clamp(350px,600px,90%);
   background-color: #f1f1f1;
   margin-left: auto;
   margin-right: auto;
@@ -16,7 +26,7 @@
   margin-top: 10%;
   position: relative;
   box-shadow: 2px 2px 2px 2px rgb(173, 173, 173);
-  padding-top: 2vh;
+  padding-bottom: 20px;
 }
 
 .form-inputs {

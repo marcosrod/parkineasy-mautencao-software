@@ -1,8 +1,14 @@
 <div class="header">
   <div class="container">
     <div class="row">
-      <div class="col-3">
-        <h1><a href="" class="title">Parkineasy</a></h1>
+      <div class="col">
+       <a href="" class="title"><img
+        class="logo"
+        src="assets/images/parkicon.png"
+        width="50"
+        height="50"
+        alt="Parkineasy icon"
+      /></a>
       </div>
       <div class="col" *ngIf="!authService.isAuthenticated()">
         <a href="/login" class="login btn btn-default">Login (funcionário)</a>
@@ -10,16 +16,21 @@
 
       <div class="col" *ngIf="authService.isAuthenticated()">
         <a href="/gerencia/funcionarios/mapa" class="logout btn btn-default"
-          >Mapa de Vagas</a>
+          >Mapa</a>
       </div>
       <div class="col" *ngIf="authService.isAuthenticated()">
         <a href="/gerencia/vagas/cadastro" class="logout btn btn-default"
-          >Cadastrar vagas</a
+          >Vagas</a
         >
       </div>
       <div class="col" *ngIf="authService.isAuthenticated()">
         <a href="/gerencia/funcionarios/cadastro" class="logout btn btn-default"
-          >Cadastrar funcionários</a
+          >Funcionários</a
+        >
+      </div>
+      <div class="col" *ngIf="authService.isAuthenticated()">
+        <a href="/gerencia/funcionarios/caixa" class="logout btn btn-default"
+          >Caixa</a
         >
       </div>
       <div class="col" *ngIf="authService.isAuthenticated()">

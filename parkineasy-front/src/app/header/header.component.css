@@ -8,6 +8,7 @@
 .logout {
   text-decoration: none;
   color: aliceblue;
+  line-height: 30px;
 }
 
 .login,
@@ -16,7 +17,6 @@
   padding-top: 10px;
 }
 
-.container{
-
-
+.row{
+  line-height: 30px;
 }
