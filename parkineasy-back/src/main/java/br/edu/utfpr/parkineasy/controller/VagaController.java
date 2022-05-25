@@ -49,7 +49,7 @@ public class VagaController {
     }
     
     @PutMapping("{codigoVaga}/alterar")
-    public VagaResponse alterarVaga(@RequestParam Integer tipo, @PathVariable String codigoVaga) {
+    public VagaResponse alterarVaga(@RequestBody Integer tipo, @PathVariable String codigoVaga) {
         return vagaService.atualizarVaga(tipo, codigoVaga);
     }
     
