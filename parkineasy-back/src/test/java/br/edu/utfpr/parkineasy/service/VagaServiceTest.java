@@ -96,7 +96,7 @@ class VagaServiceTest {
             .willReturn(true);
         assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
             .isExactlyInstanceOf(ValidationException.class)
-            .hasMessage("A vaga já existe.");
+            .hasMessage("Já existe uma vaga cadastrada com este código.");
         verify(vagaRepository, never()).save(any());
     }
 
