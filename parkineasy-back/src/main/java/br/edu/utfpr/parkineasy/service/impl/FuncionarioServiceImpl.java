@@ -59,6 +59,9 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
     @Override
     public CaixaResponse getCaixa(Integer tipoVaga) {
+        if (tipoVaga < 1 || tipoVaga > 3) {
+            throw new ValidationException("O tipo de vaga selecionado não existe.");
+        }
         var valorTotal = caixaRepository.findAllByDataPagamentoAndTipoVaga(LocalDate.now(), tipoVaga).stream()
             .map(Caixa::getValor)
             .mapToDouble(Double::doubleValue)

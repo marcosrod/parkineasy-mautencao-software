@@ -10,6 +10,7 @@ import br.edu.utfpr.parkineasy.service.TicketService;
 import br.edu.utfpr.parkineasy.service.VagaService;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ValidationException;
 import java.time.LocalDateTime;
 
 @Service
@@ -27,6 +28,9 @@ public class TicketServiceImpl implements TicketService {
     public TicketResponse criarTicket(TicketRequest ticketRequest) {
         var vaga = vagaRepository.findById(ticketRequest.getCodigoVaga())
             .orElseThrow(() -> new ParkineasyException("Vaga não encontrada."));
+        if (vaga.getOcupada()) {
+            throw new ValidationException("A vaga já está sendo ocupada.");
+        }
         Ticket ticket = new Ticket();
         ticket.setVaga(vaga);
         ticket.setDataHora(LocalDateTime.now());

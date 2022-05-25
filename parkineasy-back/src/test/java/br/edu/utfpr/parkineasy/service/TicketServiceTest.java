@@ -16,7 +16,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.validation.ValidationException;
+
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
@@ -59,5 +62,21 @@ class TicketServiceTest {
         assertThat(result)
             .extracting("id", "codigoVaga", "dataHora")
             .containsExactly(id, codigoVaga, dataHora.toString());
+    }
+
+    @Test
+    void criarTicket_deveRetornarException_quandoVagaJaEstiverOcupada() {
+        String codigoVaga = "A01";
+        var vaga = Vaga.builder()
+            .codigo("A01")
+            .tipoVaga(1)
+            .ocupada(true)
+            .build();
+        TicketRequest ticketRequest = new TicketRequest(codigoVaga);
+        given(vagaRepository.findById("A01"))
+            .willReturn(Optional.of(vaga));
+        assertThatExceptionOfType(ValidationException.class)
+            .isThrownBy(() -> ticketService.criarTicket(ticketRequest))
+            .withMessage("A vaga já está sendo ocupada.");
     }
 }
