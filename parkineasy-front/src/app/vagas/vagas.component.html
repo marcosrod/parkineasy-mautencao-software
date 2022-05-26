@@ -70,20 +70,21 @@
             </mat-option>
           </mat-select>
         </mat-form-field>
-      <mat-form-field class="tipoVaga" appearance="fill">
-        <mat-label>Tipo da vaga</mat-label>
-        <mat-select ngModel name="tipo" (selectionChange)="escolherTipo($event.value)">
-          <mat-option value="1" >Comum</mat-option>
-          <mat-option value="2" >Deficiente</mat-option>
-          <mat-option value="3" >Idoso</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div>
+        <mat-form-field class="tipoVaga" appearance="fill">
+          <mat-label>Tipo da vaga</mat-label>
+          <mat-select ngModel name="tipo" (selectionChange)="escolherTipo($event.value)">
+            <mat-option value="1" >Comum</mat-option>
+            <mat-option value="2" >Deficiente</mat-option>
+            <mat-option value="3" >Idoso</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="vagaCard">
+          <h4>{{chosedVaga.descricao && 'Tipo Atual: '+chosedVaga.descricao}}</h4>
+          </div>
+      </div>
     </div>
-      <div class="editButtons">
-        <!-- <div>
-          <h4>{{chosedVaga.codigo}}</h4>
-        <h4>{{chosedVaga.descricao}}</h4>
-        </div> -->
+      <div class="buttons">
         <button
           id="criar-vaga"
           type="submit"

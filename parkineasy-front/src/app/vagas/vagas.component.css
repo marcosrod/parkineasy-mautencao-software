@@ -43,6 +43,12 @@
   cursor: pointer;
 }
 
+.vagaCard {
+  display: flex;
+  margin-left: 10px;
+  color: #2c344c;
+}
+
 .formStyle {
   display: flex;
   flex-wrap: wrap;
