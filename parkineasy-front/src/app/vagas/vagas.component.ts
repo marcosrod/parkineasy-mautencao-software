@@ -76,7 +76,7 @@ export class VagasComponent {
         }, 3500)
       },
       error: (error: HttpErrorResponse) => {
-        this.openSnackBar('Erro ao realizar a operação')
+        this.openSnackBar('O tipo selecionado para atualização já é o que está cadastrado na vaga.')
       },
     });
   }
