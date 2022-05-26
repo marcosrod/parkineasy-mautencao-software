@@ -54,7 +54,7 @@ export class VagasComponent {
         this.openSnackBar('Cadastro Concluído')
         setTimeout(() => {
           window.location.reload();
-        }, 3500)
+        }, 2500)
       },
       error: (error: HttpErrorResponse) => {
         this.openSnackBar(error.error)
@@ -73,7 +73,7 @@ export class VagasComponent {
         this.openSnackBar('Edição Concluída')
         setTimeout(() => {
           window.location.reload();
-        }, 3500)
+        }, 2500)
       },
       error: (error: HttpErrorResponse) => {
         this.openSnackBar('O tipo selecionado para atualização já é o que está cadastrado na vaga.')
@@ -87,7 +87,7 @@ export class VagasComponent {
         this.openSnackBar('Exclusão Concluida')
         setTimeout(() => {
           window.location.reload();
-        }, 3500)
+        }, 2500)
       },
       error: (error: HttpErrorResponse) => {
         this.openSnackBar('Erro ao realizar a operação')
@@ -116,6 +116,9 @@ export class VagasComponent {
   }
 
   mudarOpt(opt: string): void {
+    this.chosedVaga = {
+      codigo: '',
+    descricao: ''}
     this.vagaOpt = opt;
   }
 
