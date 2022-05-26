@@ -117,19 +117,19 @@ public class VagaServiceImpl implements VagaService {
 
     @Override
     public List<List<VagaResponse>> listarTodasOrdenadasPorPrefixo() {
-        var listaA = vagaRepository.findAllByCodigoContaining("A")
+        var listaA = vagaRepository.findAllByCodigoContainingOrderByCodigoAsc("A")
             .stream()
             .map(VagaResponse::new)
             .collect(Collectors.toList());
-        var listaB = vagaRepository.findAllByCodigoContaining("B")
+        var listaB = vagaRepository.findAllByCodigoContainingOrderByCodigoAsc("B")
             .stream()
             .map(VagaResponse::new)
             .collect(Collectors.toList());
-        var listaC = vagaRepository.findAllByCodigoContaining("C")
+        var listaC = vagaRepository.findAllByCodigoContainingOrderByCodigoAsc("C")
             .stream()
             .map(VagaResponse::new)
             .collect(Collectors.toList());
-        var listaD = vagaRepository.findAllByCodigoContaining("D")
+        var listaD = vagaRepository.findAllByCodigoContainingOrderByCodigoAsc("D")
             .stream()
             .map(VagaResponse::new)
             .collect(Collectors.toList());
