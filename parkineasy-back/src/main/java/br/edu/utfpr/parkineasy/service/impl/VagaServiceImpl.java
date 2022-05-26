@@ -16,9 +16,9 @@ import org.springframework.stereotype.Service;
 public class VagaServiceImpl implements VagaService {
     private final VagaRepository vagaRepository;
     
-    private static final Integer QTD_MAXIMA_VAGAS = 40;
+    private static final Long QTD_MAXIMA_VAGAS = 40L;
     
-    private static final Integer QTD_MAX_VAGAS_POR_PREFIXO = 10;
+    private static final Long QTD_MAX_VAGAS_POR_PREFIXO = 10L;
     
     private static final List<String> PREFIXOS_PERMITIDOS_CODIGO_VAGAS = List.of("A", "B", "C", "D");
 
@@ -58,6 +58,7 @@ public class VagaServiceImpl implements VagaService {
         var codigoVaga = vaga.getCodigo().charAt(0);
         var qtdVagasPorCodigo = vagaRepository.countByCodigoContaining(String.valueOf(codigoVaga));
         var qtdVagas = vagaRepository.count();
+        
         if (vagaRepository.existsById(vaga.getCodigo())) {
             throw new ValidationException("Já existe uma vaga cadastrada com este código.");
         }
@@ -65,7 +66,7 @@ public class VagaServiceImpl implements VagaService {
             throw new ValidationException("O Prefixo especificado para o cadastro da vaga não é permitido. " 
                 + "Prefixos permitidos: " + PREFIXOS_PERMITIDOS_CODIGO_VAGAS);
         }
-        if (qtdVagas == QTD_MAXIMA_VAGAS) {
+        if (QTD_MAXIMA_VAGAS.equals(qtdVagas)) {
             throw new ValidationException("Não é possível criar mais vagas, limite de " + QTD_MAXIMA_VAGAS + " vagas atingido. " 
                 + "Exclua uma vaga para criar mais.");
         }

@@ -8,15 +8,17 @@ import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.impl.VagaServiceImpl;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.ValidationException;
+
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyBoolean;
@@ -101,6 +103,45 @@ class VagaServiceTest {
     }
 
     @Test
+    void criarVaga_deveLancarException_quandoTentarCadastrarPrefixoNaoPermitido() {
+        VagaRequest vagaRequest = new VagaRequest("E01", 1);
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
+            .isExactlyInstanceOf(ValidationException.class)
+            .hasMessage("O Prefixo especificado para o cadastro da vaga não é permitido. Prefixos permitidos: [A, B, C, D]");
+        verify(vagaRepository, never()).save(any());
+    }
+
+    @Test
+    void criarVaga_deveLancarException_quandoTentarCadastrarAlemDoLimitePermitido() {
+        VagaRequest vagaRequest = new VagaRequest("A11", 1);
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        when(vagaRepository.count())
+            .thenReturn(40L);
+        assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
+            .isExactlyInstanceOf(ValidationException.class)
+            .hasMessage("Não é possível criar mais vagas, limite de 40 vagas atingido. Exclua uma vaga para criar mais.");
+        verify(vagaRepository, never()).save(any());
+    }
+
+    @Test
+    void criarVaga_deveLancarException_quandoLimiteDeVagasDoPrefixoAtingido() {
+        VagaRequest vagaRequest = new VagaRequest("A11", 1);
+        given(vagaRepository.existsById(any()))
+            .willReturn(false);
+        when(vagaRepository.count())
+            .thenReturn(39L);
+        when(vagaRepository.countByCodigoContaining("A"))
+            .thenReturn(10L);
+        assertThatThrownBy(() -> vagaService.criarVaga(vagaRequest))
+            .isExactlyInstanceOf(ValidationException.class)
+            .hasMessage("Não é possível criar mais vagas com o código A, limite de 10 vagas atingido. Exclua uma vaga com este código para criar mais.");
+        verify(vagaRepository, never()).save(any());
+    }
+
+    @Test
     void criarVaga_deveCriarERetornarVagaResponse_quandoCodigoNaoEstiverCadastradoETipoVagaForComum() {
         given(vagaRepository.existsById(any()))
             .willReturn(false);
@@ -173,5 +214,52 @@ class VagaServiceTest {
                 tuple(vaga3.getCodigo(), vaga3.getOcupada(), TipoVaga.valueOf(vaga3.getTipoVaga()).toString()),
                 tuple(vaga4.getCodigo(), vaga4.getOcupada(), TipoVaga.valueOf(vaga4.getTipoVaga()).toString())
             );
+    }
+    
+    @Test
+    void excluirVaga_naoDeveLancarException_quandoVagaExistir() {
+        when(vagaRepository.findById(any())).thenReturn(Optional.of(Vaga.builder()
+            .codigo("A01").build()));
+        
+        assertThatNoException().isThrownBy(() -> vagaService.excluirVaga("A01"));
+    }
+
+    @Test
+    void excluirVaga_deveLancarException_quandoVagaNaoExistir() {
+        when(vagaRepository.findById(any())).thenReturn(Optional.empty());
+
+        AssertionsForClassTypes.assertThatExceptionOfType(ValidationException.class)
+            .isThrownBy(() -> vagaService.excluirVaga("A01"))
+            .withMessage("A vaga especificada não existe.");
+    }
+    
+    @Test
+    void atualizarVaga_deveRetornarVagaAtualizada_seVagaExistirEAtualizacaoForValida() {
+        when(vagaRepository.findById("A01"))
+            .thenReturn(Optional.of(Vaga.builder().codigo("A01").tipoVaga(1).ocupada(false).build()));
+        
+        assertThat(vagaService.atualizarVaga(2, "A01"))
+            .extracting("codigo", "descricao", "ocupada")
+            .containsExactly("A01", "DEFICIENTE", false);
+    }
+
+    @Test
+    void atualizarVaga_deveLancarException_seVagaNaoExistir() {
+        when(vagaRepository.findById("A01"))
+            .thenReturn(Optional.empty());
+
+        assertThatExceptionOfType(ValidationException.class)
+            .isThrownBy(() -> vagaService.atualizarVaga(2, "A01"))
+            .withMessage("A vaga especificada para alteração não existe.");
+    }
+
+    @Test
+    void atualizarVaga_deveLancarException_seVagaExistirEAtualizacaoInvalida() {
+        when(vagaRepository.findById("A01"))
+            .thenReturn(Optional.of(Vaga.builder().codigo("A01").tipoVaga(1).ocupada(false).build()));
+
+        assertThatExceptionOfType(ValidationException.class)
+            .isThrownBy(() -> vagaService.atualizarVaga(1, "A01"))
+            .withMessage("O tipo selecionado para atualização já é o que está cadastrado na vaga.");
     }
 }

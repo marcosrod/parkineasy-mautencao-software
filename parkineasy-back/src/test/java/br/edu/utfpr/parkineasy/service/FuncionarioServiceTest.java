@@ -2,13 +2,19 @@ package br.edu.utfpr.parkineasy.service;
 
 import br.edu.utfpr.parkineasy.dto.request.FuncionarioRequest;
 import br.edu.utfpr.parkineasy.dto.response.FuncionarioResponse;
+import br.edu.utfpr.parkineasy.model.Caixa;
 import br.edu.utfpr.parkineasy.model.Funcionario;
+import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
 import br.edu.utfpr.parkineasy.repository.CaixaRepository;
 import br.edu.utfpr.parkineasy.repository.FuncionarioRepository;
 import br.edu.utfpr.parkineasy.service.impl.FuncionarioServiceImpl;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.ValidationException;
+
+import org.apache.tomcat.jni.Local;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,6 +23,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.assertj.core.api.AssertionsForClassTypes.tuple;
 import static org.mockito.ArgumentMatchers.any;
@@ -102,5 +109,21 @@ class FuncionarioServiceTest {
         assertThat(funcionarioService.criarFuncionario(funcionarioRequest))
             .extracting("id", "nome", "email", "usuario")
             .containsExactly(id, nome, email, usuario);
+    }
+    
+    @Test
+    void getCaixa_deveRetornarCaixaDoTipoDeVaga_seTipoDeVagaNaoExistir() {
+        assertThatExceptionOfType(ValidationException.class)
+            .isThrownBy(() -> funcionarioService.getCaixa(4))
+            .withMessage("O tipo de vaga selecionado não existe.");
+    }
+
+    @Test
+    void getCaixa_deveRetornarCaixaDoTipoDeVaga_seTipoDeVagaExistir() {
+        when(caixaRepository.findAllByDataPagamentoAndTipoVaga(any(), any()))
+            .thenReturn(List.of(Caixa.builder().tipoVaga(1).dataPagamento(LocalDate.of(2022, 5, 10)).valor(15.2).build()));
+        assertThat(funcionarioService.getCaixa(1))
+            .extracting("totalCaixa", "tipoVaga")
+            .containsExactly(15.2, TipoVaga.COMUM);
     }
 }
