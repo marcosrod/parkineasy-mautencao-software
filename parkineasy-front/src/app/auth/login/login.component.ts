@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { AuthService } from '../auth.service';
 import { LoginRequest } from './login-request';
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
   private loginRequest: LoginRequest;
   public mostrarCampoSenha = true;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) {
     this.loginRequest = {
       usuario: '',
       senha: '',
@@ -23,16 +24,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message,'' ,{
+      duration: 3000,
+    });
+  }
+
   public onSubmit(loginForm: NgForm) {
     this.loginRequest.usuario = loginForm.value.usuario;
     this.loginRequest.senha = loginForm.value.senha;
-    this.authService.login(this.loginRequest).subscribe((data) => {
-      if (data) {
-        console.log('Sucesso ao realizar o login');
-        this.router.navigateByUrl('gerencia/funcionarios/mapa');
-      } else {
-        console.log('Falha ao realizar o login');
-      }
+    this.authService.login(this.loginRequest).subscribe({
+      next: () => {
+          this.router.navigateByUrl('gerencia/funcionarios/mapa');
+      },
+      error: (error: any) => {
+        this.openSnackBar('Usuário ou Senha Incorretos')
+      },
     });
   }
 }
+
+

@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PagamentoResponse } from '../vagas/pagamento-response';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { TicketResponse } from '../vagas/ticket-response';
 import { VagasService } from '../vagas/vagas.services';
@@ -45,7 +46,8 @@ export class SelecionarvagaComponent implements OnInit {
   constructor(
     private vagasService: VagasService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
     this.id = 0;
     this.listaVagas = [];
@@ -102,6 +104,12 @@ export class SelecionarvagaComponent implements OnInit {
     this.pagar()
   }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message,'' ,{
+      duration: 3000,
+    });
+  }
+
   calcular(): boolean {
     this.vagasService.calcularValor(this.ticket.id).subscribe({
       next: (value: number) => {
@@ -109,7 +117,7 @@ export class SelecionarvagaComponent implements OnInit {
         this.showModal = true
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar('Erro ao realizar uma operação')
         return false;
       },
     });
@@ -141,7 +149,7 @@ export class SelecionarvagaComponent implements OnInit {
         // this.router.navigateByUrl('/home');
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar('Erro ao realizar uma operação')
         return false;
       },
     });
@@ -159,7 +167,7 @@ export class SelecionarvagaComponent implements OnInit {
         this.pageContent = 'comprovante'
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar('Erro ao realizar uma operação')
         return false;
       },
     });

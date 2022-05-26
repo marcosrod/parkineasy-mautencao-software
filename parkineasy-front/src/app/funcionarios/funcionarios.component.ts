@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { FuncionarioResponse } from './funcionario-response';
 import { FuncionariosServices } from './funcionarios.services';
@@ -11,7 +12,7 @@ import { FuncionariosServices } from './funcionarios.services';
   styleUrls: ['./funcionarios.component.css'],
 })
 export class FuncionariosComponent {
-  constructor(private funcionariosServices: FuncionariosServices) {}
+  constructor(private funcionariosServices: FuncionariosServices,private snackBar: MatSnackBar) {}
 
   public onAddFuncionario(addForm: NgForm): void {
     this.funcionariosServices.addFuncionario(addForm.value).subscribe({
@@ -22,15 +23,24 @@ export class FuncionariosComponent {
         Nome: ${response.nome}
         E-mail: ${response.email}
         Usuário: ${response.usuario}`;
-        alert(resposta);
-        window.location.reload();
+        this.openSnackBar('Cadastro Concluido')
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500)
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar(error.error)
       },
     });
   }
   title = 'parkineasy-front';
   url = './public/images/parkicon.png';
   hide: any;
+
+  openSnackBar(message: string) {
+    this.snackBar.open(message,'' ,{
+      duration: 3000,
+    });
+  }
+  
 }

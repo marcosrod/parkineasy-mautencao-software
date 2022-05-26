@@ -2,19 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { VagaResponse } from './vaga-response';
 import { VagasService } from './vagas.services';
-
-// interface VagaTypeObj {
-//   [x: string]: number
-// }
-
-// const vagaTypes: VagaTypeObj = {
-//   COMUM: 1,
-//   DEFICIENTE: 2,
-//   IDOSO: 3
-// }
 
 @Component({
   selector: 'app-root',
@@ -34,7 +25,7 @@ export class VagasComponent {
     descricao: ''
   }
 
-  constructor(private vagasService: VagasService, private router: Router) {}
+  constructor(private vagasService: VagasService, private router: Router,private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.vagasService.listarVagasOrdenadas().subscribe((values) => {
@@ -47,6 +38,12 @@ export class VagasComponent {
     });
   }
 
+  openSnackBar(message: string) {
+    this.snackBar.open(message,'' ,{
+      duration: 3000,
+    });
+  }
+
   public onAddVaga(addForm: NgForm): void {
     this.vagasService.addVaga(addForm.value).subscribe({
       next: (response: VagaResponse) => {
@@ -54,11 +51,13 @@ export class VagasComponent {
         Vaga criada com sucesso!
         Código da vaga: ${response.codigo}
         Descrição: ${response.descricao}`;
-        alert(resposta);
-        window.location.reload();
+        this.openSnackBar('Cadastro Concluído')
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500)
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar(error.error)
       },
     });
   }
@@ -71,11 +70,13 @@ export class VagasComponent {
     }
     this.vagasService.editVaga(objVaga).subscribe({
       next: (response: any) => {
-        console.log(response)
-        window.location.reload();
+        this.openSnackBar('Edição Concluída')
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500)
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar('Erro ao realizar a operação')
       },
     });
   }
@@ -83,11 +84,13 @@ export class VagasComponent {
   public onDelVaga(cod: string): void {
     this.vagasService.delVaga(cod).subscribe({
       next: (response: any) => {
-        console.log(response)
-        window.location.reload();
+        this.openSnackBar('Exclusão Concluida')
+        setTimeout(() => {
+          window.location.reload();
+        }, 3500)
       },
       error: (error: HttpErrorResponse) => {
-        alert(error.message);
+        this.openSnackBar('Erro ao realizar a operação')
       },
     });
   }

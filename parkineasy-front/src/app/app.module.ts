@@ -11,6 +11,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxWebstorageModule } from 'ngx-webstorage';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -52,6 +53,7 @@ import { CaixaComponent } from './caixa/caixa.component';
     MatCardModule,
     MatInputModule,
     HttpClientModule,
+    MatSnackBarModule,
     FormsModule,
     MatIconModule,
     NgxWebstorageModule.forRoot(),
