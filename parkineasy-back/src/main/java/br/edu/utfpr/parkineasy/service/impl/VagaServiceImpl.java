@@ -3,6 +3,7 @@ package br.edu.utfpr.parkineasy.service.impl;
 import br.edu.utfpr.parkineasy.dto.request.VagaRequest;
 import br.edu.utfpr.parkineasy.dto.response.VagaResponse;
 import br.edu.utfpr.parkineasy.model.Vaga;
+import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.VagaService;
 import java.util.List;
@@ -16,14 +17,17 @@ import org.springframework.stereotype.Service;
 public class VagaServiceImpl implements VagaService {
     private final VagaRepository vagaRepository;
     
+    private final TicketRepository ticketRepository;
+    
     private static final Long QTD_MAXIMA_VAGAS = 40L;
     
     private static final Long QTD_MAX_VAGAS_POR_PREFIXO = 10L;
     
     private static final List<String> PREFIXOS_PERMITIDOS_CODIGO_VAGAS = List.of("A", "B", "C", "D");
 
-    public VagaServiceImpl(VagaRepository vagaRepository) {
+    public VagaServiceImpl(VagaRepository vagaRepository, TicketRepository ticketRepository) {
         this.vagaRepository = vagaRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     @Override
@@ -92,9 +96,10 @@ public class VagaServiceImpl implements VagaService {
 
     @Override
     public void excluirVaga(String codigoVaga) {
-        vagaRepository.findById(codigoVaga)
+        var vaga = vagaRepository.findById(codigoVaga)
                 .orElseThrow(() -> new ValidationException("A vaga especificada não existe."));
         
+        ticketRepository.deleteAllByVaga(vaga);
         vagaRepository.deleteById(codigoVaga);
     }
 

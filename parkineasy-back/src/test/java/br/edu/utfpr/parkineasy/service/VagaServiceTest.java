@@ -5,6 +5,7 @@ import br.edu.utfpr.parkineasy.dto.request.VagaRequest;
 import br.edu.utfpr.parkineasy.dto.response.VagaResponse;
 import br.edu.utfpr.parkineasy.model.Vaga;
 import br.edu.utfpr.parkineasy.model.enumeration.TipoVaga;
+import br.edu.utfpr.parkineasy.repository.TicketRepository;
 import br.edu.utfpr.parkineasy.repository.VagaRepository;
 import br.edu.utfpr.parkineasy.service.impl.VagaServiceImpl;
 import java.util.List;
@@ -32,6 +33,9 @@ import static org.mockito.Mockito.when;
 class VagaServiceTest {
     @Mock
     private VagaRepository vagaRepository;
+    
+    @Mock
+    private TicketRepository ticketRepository;
 
     private VagaService vagaService;
 
@@ -45,7 +49,7 @@ class VagaServiceTest {
 
     @BeforeEach
     void setUp() {
-        vagaService = new VagaServiceImpl(vagaRepository);
+        vagaService = new VagaServiceImpl(vagaRepository, ticketRepository);
     }
 
     @Test
